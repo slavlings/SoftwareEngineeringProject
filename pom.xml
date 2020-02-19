@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>slavlings</groupId>
+    <artifactId>SoftwareEngineeringProject</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <junit.jupiter.version>5.5.2</junit.jupiter.version>
+        <!-- Set the source directory for new directory structure -->
+        <src.dir>src/main/java</src.dir>
+
+        <!-- Set the test source directory for new directory structure -->
+        <test.src.dir>src/test/java</test.src.dir>
+    </properties>
+
+    <!-- These are the other software libraries developed by third parties that we need -->
+    <dependencies>
+        <!-- Add JUnit 5 for unit testing (see properties for version) -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Mockito -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>3.2.4</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <!-- Where do our Java sources come from? -->
+        <sourceDirectory>${src.dir}</sourceDirectory>
+
+        <!-- Where do our Java test sources come from? -->
+        <testSourceDirectory>${test.src.dir}</testSourceDirectory>
+
+        <plugins>
+            <!-- Use Java 11 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <release>11</release>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
