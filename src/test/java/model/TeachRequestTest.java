@@ -20,8 +20,8 @@ public class TeachRequestTest {
         @Test
         public void throwsIfNoProposedTeacher() {
             Course course = mock(Course.class);
-
             TeachRequest teachRequest = new TeachRequest(course);
+
             assertThrows(NoProposedTeacherException.class, teachRequest::approve);
         }
 
@@ -31,9 +31,11 @@ public class TeachRequestTest {
             Teacher teacher = mock(Teacher.class);
             Course course = mock(Course.class);
 
+            //teacher hasn't completed the training for course
             when(teacher.completedTraining(course)).thenReturn(false);
 
             TeachRequest teachRequest = new TeachRequest(course);
+
             teachRequest.proposeTeacher(teacher);
 
             assertThrows(TeacherNotCompletedTrainingException.class, teachRequest::approve);
@@ -47,9 +49,11 @@ public class TeachRequestTest {
             Teacher teacher = mock(Teacher.class);
             Course course = mock(Course.class);
 
+            //teacher has completed the training for course
             when(teacher.completedTraining(course)).thenReturn(true);
 
             TeachRequest teachRequest = new TeachRequest(course);
+
             teachRequest.proposeTeacher(teacher);
 
             assertDoesNotThrow(teachRequest::approve);
