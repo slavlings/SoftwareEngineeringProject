@@ -1,11 +1,14 @@
-package main.java.model;
+package model;
+
+import model.exceptions.NonExistentTeachRequestException;
+import model.exceptions.TeacherNotSuitableForCourseException;
 
 import java.util.List;
 
 public class Admin extends Employee {
     private List<Teacher> teacherList;
     private List<Course> classes;
-    private TeacherRequestMap teacherRequestMap;
+    private TeachRequestMap teachRequestMap;
 
     public Admin(String name, List<Course> classes, TeachRequestMap teachRequestMap) {
         super(name);
@@ -23,8 +26,8 @@ public class Admin extends Employee {
         return suitableTeacherList;
     }
 
-    public void proposeTeacher(Course course, Teacher teacher) {
-        teacherRequestMap.proposeTeacher(course, teacher);
+    public void proposeTeacher(Course course, Teacher teacher) throws TeacherNotSuitableForCourseException, NonExistentTeachRequestException {
+        teachRequestMap.proposeTeacher(course, teacher);
     }
 
     public void addTraining(Teacher teacher, String training) {
