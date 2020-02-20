@@ -3,6 +3,7 @@ package model;
 import model.exceptions.NonExistentTeachRequestException;
 import model.exceptions.TeacherNotSuitableForCourseException;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Admin extends Employee {
@@ -16,22 +17,31 @@ public class Admin extends Employee {
         this.teachRequestMap = teachRequestMap;
     }
 
-    public List<Teacher> findSuitableStaff(Course course) {
-        List<Teacher> suitableTeacherList = null;
+    public LinkedList<Teacher> findSuitableStaff(Course course) {
+        LinkedList<Teacher> suitableTeacherList = new LinkedList <Teacher>();
         for (int i = 0; i < teacherList.size(); i++) {
-            if (teacherList.get(i).requirementsFulfilled(teacherList.get(i).getSkills())) {
-                suitableTeacherList.add(teacherList.get(i));
+            Teacher teacherToCheck = teacherList.get(i);
+            if(teacherToCheck.satisfiesTeachReqs(course)) {
+                suitableTeacherList.add(teacherToCheck);
             }
         }
         return suitableTeacherList;
     }
 
-    public void proposeTeacher(Course course, Teacher teacher) throws TeacherNotSuitableForCourseException, NonExistentTeachRequestException {
-        teachRequestMap.proposeTeacher(course, teacher);
+    public void proposeTeacher(Course course, Teacher teacher) {
+        try {
+            teachRequestMap.proposeTeacher(course, teacher);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void addTraining(Teacher teacher, String training) {
         teacher.addTraining(training);
+    }
+
+    public void completeTraining(Teacher teacher, String training) {
+        teacher.completeTraining(training);
     }
 
     public void addCourse(Course course) {
