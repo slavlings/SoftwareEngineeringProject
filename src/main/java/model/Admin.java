@@ -72,7 +72,7 @@ public class Admin extends Employee {
     }
 
     /**
-     * Completes the training using the teacher class method
+     * Adds the training using the teacher class method
      *
      * @param training given name of training
      * @param teacher  given teacher
