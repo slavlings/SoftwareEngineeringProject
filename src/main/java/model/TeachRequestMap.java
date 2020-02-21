@@ -62,7 +62,7 @@ public class TeachRequestMap {
 
     /**
      * Attempts to approve a teaching request for the given course.
-     * If unsuccessful, throws an exception or prints the stack trace
+     * If unsuccessful, throws an exception or prints the message
      * for a caught exception.
      * @param course given course
      * @throws NonExistentTeachRequestException the teaching request does not exist
@@ -78,7 +78,7 @@ public class TeachRequestMap {
                 request.approve();
                 teachRequestMap.remove(course.toString());
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());
             }
         }
     }

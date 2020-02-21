@@ -22,15 +22,12 @@ public class PTTDirector extends Employee {
 
     /**
      * Attempts to approve a teaching request for the given course.
-     * If unsuccessful prints the stack trace of any caught exceptions.
+     * If unsuccessful prints the stack trace of any caught exceptions
+     * or throws a NonExistentTeachRequestException.
      * @param course given course
+     * @throws NonExistentTeachRequestException
      */
-    public void approveTeachRequest(Course course) {
-        //try to approve the request and print any exception trace if unsuccessful
-        try {
-            teachRequestMap.approveTeachRequest(course);
-        } catch (NonExistentTeachRequestException e) {
-            e.printStackTrace();
-        }
+    public void approveTeachRequest(Course course) throws NonExistentTeachRequestException {
+        teachRequestMap.approveTeachRequest(course);
     }
 }
