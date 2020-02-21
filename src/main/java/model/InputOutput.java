@@ -33,7 +33,7 @@ public class InputOutput {
 
 
         try {
-            // Java objects to JSON file
+
             mapper.writeValue(new File(FILE_PATH_STRING), staffMap);
 
         } catch (IOException e) {
@@ -44,10 +44,9 @@ public class InputOutput {
 
     public void readFromJSON() {
         ObjectMapper mapper = new ObjectMapper();
-        HashMap<String, Object> staffMap = new HashMap<>();
         try {
-            // JSON file to Java object
-            staffMap = mapper.readValue(new File(FILE_PATH_STRING), StaffMap.class);
+
+            HashMap<String, Object> staffMap = mapper.readValue(new File(FILE_PATH_STRING), HashMap.class);
 
         } catch (IOException e) {
             e.printStackTrace();
