@@ -70,7 +70,8 @@ public class TeachRequestMapTest {
             assertEquals(teachRequest, teachRequestMap.teachRequestMap.get("CourseName"));
         }
 
-        @DisplayName("If the proposed teacher has completed his training, " +
+        @DisplayName("If the proposed teacher has completed his training" +
+                     "(teachRequest.approve() throws no exceptions), " +
                 "the request is approved and it is removed from the map.")
         @Test
         public void completedTraining() throws NonExistentTeachRequestException {
