@@ -1,5 +1,7 @@
 package model;
 
+import model.exceptions.NoTeachRequirementsSetException;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -11,14 +13,14 @@ import java.util.ArrayList;
 
 public class Course {
     private String name;
-    private List<String> teachRequirements = null;
+    private List<String> teachRequirements;
     private int termOrSemester;
     private Teacher teacher;
     private String requiredTrainingName;
 
     /**
      * Constructor.
-     * points to null teacher when initialized
+     * points to null teacher and teachRequirements when initialized
      * @param name of the course
      * @param termOrSemester to indicate in which semester is the course taught
      * @param requiredTrainingName indicates training required for teaching the course
@@ -28,11 +30,12 @@ public class Course {
         this.requiredTrainingName = requiredTrainingName;
         this.termOrSemester = termOrSemester;
         this.teacher = null;
+        this.teachRequirements = null;
     }
 
     /**
-     * Constructor
-     *  @return requiredTrainingName for the specific course
+     * toString
+     *  @return name of course
      */
     @Override
     public String toString() {
@@ -61,17 +64,23 @@ public class Course {
         this.teachRequirements = teachRequirements;
     }
 
-
     /**
-     * Used for comparison of required skills and actual skills in teacher
-     *  @return boolean, true if teaching requirements match the skills the teacher has
+     * Used to determine if a teacher has the required skills to teach a course
+     * @param skills skills a teacher possesses
+     * @return boolean, true if teaching requirements match the skills the teacher has
+     * @throws NoTeachRequirementsSetException the teaching requirements for the course haven't been set
      */
-    public boolean requirementsFulfilled(List <String> skills) {
-        if ((skills.containsAll(teachRequirements))){
-            return true;
+    public boolean requirementsFulfilled(List <String> skills) throws NoTeachRequirementsSetException {
+
+        if(teachRequirements == null || teachRequirements.isEmpty()) {
+            throw new NoTeachRequirementsSetException();
+        } else {
+            if ((skills.containsAll(teachRequirements))){
+                return true;
+            } else {
+                return false;
+            }
         }
-        else
-        {return false;}
     }
 
 
