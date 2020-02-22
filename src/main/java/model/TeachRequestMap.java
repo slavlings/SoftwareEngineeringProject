@@ -1,8 +1,6 @@
 package model;
 
-import model.exceptions.NonExistentTeachRequestException;
-import model.exceptions.TeachRequestAlreadyGivenException;
-import model.exceptions.TeacherNotSuitableForCourseException;
+import model.exceptions.*;
 
 import java.util.HashMap;
 
@@ -62,12 +60,13 @@ public class TeachRequestMap {
 
     /**
      * Attempts to approve a teaching request for the given course.
-     * If unsuccessful, throws an exception or prints the message
-     * for a caught exception.
+     * If unsuccessful, throws an exception.
      * @param course given course
      * @throws NonExistentTeachRequestException the teaching request does not exist
+     * @throws NoProposedTeacherException there is no proposed teacher
+     * @throws TeacherNotCompletedTrainingException the proposed teacher hasn't completed the required training
      */
-    public void approveTeachRequest(Course course) throws NonExistentTeachRequestException {
+    public void approveTeachRequest(Course course) throws NonExistentTeachRequestException, NoProposedTeacherException, TeacherNotCompletedTrainingException {
         if (!teachRequestMap.containsKey(course.toString())) {
             //there is no teaching request for the given course
             throw new NonExistentTeachRequestException();
@@ -78,7 +77,7 @@ public class TeachRequestMap {
                 request.approve();
                 teachRequestMap.remove(course.toString());
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                throw e;
             }
         }
     }
