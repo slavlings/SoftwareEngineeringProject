@@ -11,7 +11,7 @@ import java.util.HashMap;
  */
 public class TeachRequestMap {
 
-    HashMap<String, TeachRequest> teachRequestMap;
+    private HashMap<String, TeachRequest> teachRequestMap;
 
     /**
      * Constructor.
