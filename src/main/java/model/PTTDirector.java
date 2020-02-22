@@ -1,8 +1,6 @@
 package model;
 
-import model.exceptions.NoProposedTeacherException;
 import model.exceptions.NonExistentTeachRequestException;
-import model.exceptions.TeacherNotCompletedTrainingException;
 
 /**
  * Represents a PTTDirector.
@@ -23,13 +21,13 @@ public class PTTDirector extends Employee {
     }
 
     /**
-     * Try to approve the teaching request, throws exceptions if unsuccessful.
+     * Attempts to approve a teaching request for the given course.
+     * If unsuccessful prints the stack trace of any caught exceptions
+     * or throws a NonExistentTeachRequestException.
      * @param course given course
-     * @throws NonExistentTeachRequestException the teaching request does not exist
-     * @throws NoProposedTeacherException there is no proposed teacher
-     * @throws TeacherNotCompletedTrainingException the proposed teacher hasn't completed the required training
+     * @throws NonExistentTeachRequestException
      */
-    public void approveTeachRequest(Course course) throws NonExistentTeachRequestException, NoProposedTeacherException, TeacherNotCompletedTrainingException {
+    public void approveTeachRequest(Course course) throws NonExistentTeachRequestException {
         teachRequestMap.approveTeachRequest(course);
     }
 }

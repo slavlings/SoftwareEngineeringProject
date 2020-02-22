@@ -25,10 +25,10 @@ public class ClassDirector extends Employee {
     }
 
     /**
-     * Sets the teaching requirements(teacher skills) for the course the class director directs
+     * Sets the teaching requirements for course the class director directs
      */
-    public void setCourseTeachRequirements(List<String> skills) {
-        directedCourse.setTeachRequirements(skills);
+    public void setCourseTeachRequirements(List<String> skill) {
+        directedCourse.setTeachRequirements(skill);
     }
 
     /**
