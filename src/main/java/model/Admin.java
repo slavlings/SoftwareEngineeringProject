@@ -28,10 +28,11 @@ public class Admin extends Employee {
      * @param teachRequestMap holds teaching requests to be approved by the director
      */
 
-    public Admin(String name, List<Course> classes, TeachRequestMap teachRequestMap) {
+    public Admin(String name, List<Course> classes, List<Teacher> teacherList, TeachRequestMap teachRequestMap) {
         super(name);
         this.classes = classes;
         this.teachRequestMap = teachRequestMap;
+        this.teacherList = teacherList;
     }
 
     /**
