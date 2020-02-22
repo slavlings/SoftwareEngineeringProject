@@ -45,7 +45,9 @@ public class TeachRequestMap {
      * @throws TeacherNotSuitableForCourseException the teacher is not suitable for the course
      */
     public void proposeTeacher(Course course, Teacher teacher) throws NonExistentTeachRequestException, TeacherNotSuitableForCourseException {
-        if (!teachRequestMap.containsKey(course.toString())) {
+        String courseName = course.toString();
+
+        if (!teachRequestMap.containsKey(courseName)) {
             //there is no teaching request for the given course
             throw new NonExistentTeachRequestException();
         } else if (!teacher.satisfiesTeachReqs(course)) {
@@ -53,7 +55,7 @@ public class TeachRequestMap {
             throw new TeacherNotSuitableForCourseException();
         } else {
             //propose the teacher
-            TeachRequest request = teachRequestMap.get(course.toString());
+            TeachRequest request = teachRequestMap.get(courseName);
             request.proposeTeacher(teacher);
         }
     }
@@ -67,15 +69,18 @@ public class TeachRequestMap {
      * @throws TeacherNotCompletedTrainingException the proposed teacher hasn't completed the required training
      */
     public void approveTeachRequest(Course course) throws NonExistentTeachRequestException, NoProposedTeacherException, TeacherNotCompletedTrainingException {
-        if (!teachRequestMap.containsKey(course.toString())) {
+
+        String courseName = course.toString();
+
+        if (!teachRequestMap.containsKey(courseName)) {
             //there is no teaching request for the given course
             throw new NonExistentTeachRequestException();
         } else {
             //try to approve the request and print any exception trace if unsuccessful
-            TeachRequest request = teachRequestMap.get(course.toString());
+            TeachRequest request = teachRequestMap.get(courseName);
             try {
                 request.approve();
-                teachRequestMap.remove(course.toString());
+                teachRequestMap.remove(courseName);
             } catch (Exception e) {
                 throw e;
             }
