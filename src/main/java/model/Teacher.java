@@ -1,5 +1,7 @@
 package model;
 
+import model.exceptions.NoTeachRequirementsSetException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,17 +10,19 @@ public class Teacher extends Employee{
     private List<String> skills;
     private ArrayList<String> completedTrainings;
     private ArrayList<String> uncompletedTrainings;
-    private String taughtCourse;
+    private Course taughtCourse;
 
     public Teacher(String name) {
         super(name);
+        uncompletedTrainings = new ArrayList<>();
+        completedTrainings = new ArrayList<>();
     }
 
     /**
      * Sets the course taught by this teacher.
      * @param taughtCourse name of the course.
      */
-    public void setCourse(String taughtCourse) {
+    public void setCourse(Course taughtCourse) {
         this.taughtCourse = taughtCourse;
     }
 
@@ -34,7 +38,7 @@ public class Teacher extends Employee{
      * Adds a training to the list of uncompleted trainings.
      * @param training
      */
-    private void addTraining(String training){
+    public void addTraining(String training){
         uncompletedTrainings.add(training);
     }
 
@@ -46,7 +50,7 @@ public class Teacher extends Employee{
      *
      * @param training
      */
-    private void completeTraining(final String training){
+    public void completeTraining(final String training){
         final boolean isRemoved = uncompletedTrainings.remove(training);
         if(isRemoved) {
             completedTrainings.add(training);
@@ -58,12 +62,20 @@ public class Teacher extends Employee{
      * @param course
      * @return true if completed; else false.
      */
-    private boolean completedTraining(final Course course ){
+    public boolean completedTraining(final Course course ){
         String reqTraining = course.getReqTraining();
         if(completedTrainings.contains(reqTraining)){
             return true;
         } else{
             return false;
         }
+    }
+
+    public void setSkills(List<String> skills) {
+        this.skills = skills;
+    }
+
+    public boolean satisfiesTeachReqs(Course course) throws NoTeachRequirementsSetException {
+        return course.requirementsFulfilled(skills);
     }
 }

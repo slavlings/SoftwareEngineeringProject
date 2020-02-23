@@ -1,9 +1,6 @@
 package model;
 
-import model.exceptions.NoProposedTeacherException;
-import model.exceptions.NonExistentTeachRequestException;
-import model.exceptions.TeacherNotCompletedTrainingException;
-import model.exceptions.TeacherNotSuitableForCourseException;
+import model.exceptions.*;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -38,7 +35,7 @@ public class Admin extends Employee {
      * @param teacherList list of all teachers
      * @return list of suitable teachers
      */
-    public LinkedList<Teacher> findSuitableStaff(Course course, List<Teacher> teacherList) {
+    public LinkedList<Teacher> findSuitableStaff(Course course, List<Teacher> teacherList) throws NoTeachRequirementsSetException {
         LinkedList<Teacher> suitableTeacherList = new LinkedList<Teacher>();
         for (int i = 0; i < teacherList.size(); i++) {
             Teacher teacherToCheck = teacherList.get(i);
