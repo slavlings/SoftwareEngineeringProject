@@ -1,7 +1,6 @@
 package model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import model.exceptions.*;
 
 import java.util.LinkedList;
@@ -13,6 +12,7 @@ import java.util.List;
  * Has functionality for finding suitable staff, proposing teacher and adding/completing trainings for teachers
  */
 @JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Admin extends Employee {
 
     private TeachRequestMap teachRequestMap;
@@ -24,7 +24,8 @@ public class Admin extends Employee {
      * @param teachRequestMap holds teaching requests to be approved by the director
      */
 
-    public Admin(String name, TeachRequestMap teachRequestMap) {
+    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
+    public Admin(@JsonProperty("name") String name,@JsonProperty("teachRequestMap") TeachRequestMap teachRequestMap) {
         super(name);
         this.teachRequestMap = teachRequestMap;
 

@@ -1,19 +1,28 @@
 package model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import model.exceptions.NoTeachRequirementsSetException;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 @JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Teacher extends Employee{
 
     private List<String> skills;
     private List<String> completedTrainings;
     private List<String> uncompletedTrainings;
     private Course taughtCourse;
+
+    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
+    public Teacher(@JsonProperty("name") String name,@JsonProperty("skills") List<String> skills,@JsonProperty("completedTrainings") List<String> completedTrainings,@JsonProperty("uncompletedTrainings") List<String> uncompletedTrainings,@JsonProperty("taughtCourse") Course taughtCourse) {
+        super(name);
+        this.skills = skills;
+        this.completedTrainings = completedTrainings;
+        this.uncompletedTrainings = uncompletedTrainings;
+        this.taughtCourse = taughtCourse;
+    }
 
     public Teacher(String name) {
         super(name);

@@ -1,7 +1,6 @@
 package model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import model.exceptions.NoTeachRequirementsSetException;
 
 import java.util.List;
@@ -13,12 +12,22 @@ import java.util.ArrayList;
  * Holds information about required training name for comparisons
  */
 @JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Course {
     private String name;
     private List<String> teachRequirements;
     private int termOrSemester;
     private Teacher teacher;
     private String requiredTrainingName;
+
+    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
+    public Course(@JsonProperty("name") String name,@JsonProperty("teachRequirements") List<String> teachRequirements,@JsonProperty("termOrSemester") int termOrSemester,@JsonProperty("teacher") Teacher teacher,@JsonProperty("requiredTrainingName") String requiredTrainingName) {
+        this.name = name;
+        this.teachRequirements = teachRequirements;
+        this.termOrSemester = termOrSemester;
+        this.teacher = teacher;
+        this.requiredTrainingName = requiredTrainingName;
+    }
 
     /**
      * Constructor.

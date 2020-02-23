@@ -1,7 +1,6 @@
 package model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import model.exceptions.*;
 
 import java.util.HashMap;
@@ -12,9 +11,15 @@ import java.util.HashMap;
  * and proposing teachers.
  */
 @JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class TeachRequestMap {
 
     HashMap<String, TeachRequest> teachRequestMap;
+
+    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
+    public TeachRequestMap(@JsonProperty("teachRequestMap") HashMap<String, TeachRequest> teachRequestMap) {
+        this.teachRequestMap = teachRequestMap;
+    }
 
     /**
      * Constructor.

@@ -1,7 +1,6 @@
 package model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import model.exceptions.NoProposedTeacherException;
 import model.exceptions.NonExistentTeachRequestException;
 import model.exceptions.TeacherNotCompletedTrainingException;
@@ -11,6 +10,7 @@ import model.exceptions.TeacherNotCompletedTrainingException;
  * Has functionality for approving teaching requests.
  */
 @JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class PTTDirector extends Employee {
 
     private TeachRequestMap teachRequestMap;
@@ -20,7 +20,8 @@ public class PTTDirector extends Employee {
      * @param name name of director
      * @param teachRequestMap holds teaching requests to be approved by director
      */
-    public PTTDirector(String name, TeachRequestMap teachRequestMap) {
+    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
+    public PTTDirector(@JsonProperty("name") String name,@JsonProperty("teachRequestMap") TeachRequestMap teachRequestMap) {
         super(name);
         this.teachRequestMap = teachRequestMap;
     }

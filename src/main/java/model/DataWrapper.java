@@ -1,7 +1,12 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class DataWrapper {
 
     private List<Teacher> teachers;
@@ -10,7 +15,8 @@ public class DataWrapper {
     private Admin admin;
     private PTTDirector pttDirector;
 
-    public DataWrapper(List<Teacher> teachers, List<Course> courses, List<ClassDirector> classDirectors, Admin admin, PTTDirector pttDirector) {
+    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
+    public DataWrapper(@JsonProperty("teachers") List<Teacher> teachers,@JsonProperty("courses") List<Course> courses,@JsonProperty("classDirectors") List<ClassDirector> classDirectors,@JsonProperty("admin") Admin admin,@JsonProperty("pttDirector") PTTDirector pttDirector) {
         this.teachers = teachers;
         this.courses = courses;
         this.classDirectors = classDirectors;
