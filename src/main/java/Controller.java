@@ -143,8 +143,19 @@ public class Controller {
                     try {
                         System.out.println("Proposal successful.");
                         admin.proposeTeacher(course, proposedTeacher);
-                        System.out.println("Do you want to assign training to the proposed teacher?");
-                        
+                        System.out.println("Do you want to assign the required training for the course to the proposed teacher?");
+                        System.out.println("Type in yes to proceed or no to go back");
+                        while(true) {
+                            userInput = scanner.nextLine();
+                            if(userInput.equals("yes") || userInput.equals("no")) {
+                                break;
+                            }
+                            System.out.println("Incorrect input. Try again.");
+                        }
+                        if(userInput.equals("yes")) {
+                            admin.addTraining(proposedTeacher, course.getRequiredTrainingName());
+                            System.out.println("Training successfully assigned.");
+                        }
                     } catch (Exception e) {
                         System.out.println("Proposal unsuccessful.");
                         System.out.println(e.getMessage());
