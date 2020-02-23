@@ -5,19 +5,21 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import model.exceptions.NoTeachRequirementsSetException;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 @JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id", scope=Teacher.class)
 public class Teacher extends Employee{
 
     private List<String> skills;
-    private ArrayList<String> completedTrainings;
-    private ArrayList<String> uncompletedTrainings;
+    private List<String> completedTrainings;
+    private List<String> uncompletedTrainings;
     private Course taughtCourse;
 
     public Teacher(String name) {
         super(name);
-        uncompletedTrainings = new ArrayList<>();
-        completedTrainings = new ArrayList<>();
+        uncompletedTrainings = new LinkedList<>();
+        completedTrainings = new LinkedList<>();
+        skills = new LinkedList<>();
     }
 
     /**

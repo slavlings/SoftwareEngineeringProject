@@ -20,6 +20,7 @@ public class InputOutput {
     public void writeToJSON(DataWrapper dataWrapper) {
 
         ObjectMapper mapper = new ObjectMapper();
+        mapper.enableDefaultTyping();
 
         try {
 
@@ -33,6 +34,7 @@ public class InputOutput {
 
     public DataWrapper readFromJSON() {
         ObjectMapper mapper = new ObjectMapper();
+        mapper.enableDefaultTyping();
 
         DataWrapper dataWrapper = null;
         try {

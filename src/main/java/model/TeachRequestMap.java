@@ -14,7 +14,7 @@ import java.util.HashMap;
 @JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id", scope=TeachRequestMap.class)
 public class TeachRequestMap {
 
-    private HashMap<String, TeachRequest> teachRequestMap;
+    HashMap<String, TeachRequest> teachRequestMap;
 
     /**
      * Constructor.

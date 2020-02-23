@@ -40,9 +40,9 @@ public class TeachRequestMapTest {
             Course course = mock(Course.class);
             //course's name is CourseName
             when(course.toString()).thenReturn("CourseName");
-
-            teachRequestMap.approveTeachRequest(course);
-
+            try {
+                teachRequestMap.approveTeachRequest(course);
+            }catch (NoProposedTeacherException e) {}
             //teachRequest is still in the underlying map
             assertEquals(teachRequest, teachRequestMap.teachRequestMap.get("CourseName"));
         }
@@ -63,9 +63,9 @@ public class TeachRequestMapTest {
             Course course = mock(Course.class);
             //course's name is CourseName
             when(course.toString()).thenReturn("CourseName");
-
-            teachRequestMap.approveTeachRequest(course);
-
+            try{
+                teachRequestMap.approveTeachRequest(course);
+            }catch (TeacherNotCompletedTrainingException e) {}
             //teachRequest is still in the underlying map
             assertEquals(teachRequest, teachRequestMap.teachRequestMap.get("CourseName"));
         }
@@ -74,7 +74,7 @@ public class TeachRequestMapTest {
                      "(teachRequest.approve() throws no exceptions), " +
                 "the request is approved and it is removed from the map.")
         @Test
-        public void completedTraining() throws NonExistentTeachRequestException {
+        public void completedTraining() throws NonExistentTeachRequestException, NoProposedTeacherException, TeacherNotCompletedTrainingException {
             TeachRequestMap teachRequestMap = new TeachRequestMap();
             TeachRequest teachRequest = mock(TeachRequest.class);
 
@@ -112,7 +112,7 @@ public class TeachRequestMapTest {
 
         @DisplayName("The teacher must satisfy the teaching requirements.")
         @Test
-        public void notSatisfyingTeachReqs() {
+        public void notSatisfyingTeachReqs() throws NoTeachRequirementsSetException {
             TeachRequestMap teachRequestMap = new TeachRequestMap();
             Course course = mock(Course.class);
             Teacher teacher = mock(Teacher.class);
@@ -133,7 +133,7 @@ public class TeachRequestMapTest {
         @DisplayName("If there is a teach request and the requirements are met," +
                 "nothing should be thrown.")
         @Test
-        public void proposalOK() {
+        public void proposalOK() throws NoTeachRequirementsSetException {
             TeachRequestMap teachRequestMap = new TeachRequestMap();
             Course course = mock(Course.class);
             Teacher teacher = mock(Teacher.class);

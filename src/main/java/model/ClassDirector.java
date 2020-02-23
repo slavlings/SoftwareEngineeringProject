@@ -41,6 +41,7 @@ public class ClassDirector extends Employee {
         teachRequestMap.addTeachRequest(directedCourse);
     }
 
-
-
+    public void setDirectedCourse(Course directedCourse) {
+        this.directedCourse = directedCourse;
+    }
 }
