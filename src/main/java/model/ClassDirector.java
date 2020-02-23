@@ -12,6 +12,7 @@ import java.util.List;
  */
 @JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class ClassDirector extends Employee {
     private Course directedCourse;
     private TeachRequestMap teachRequestMap;

@@ -11,6 +11,7 @@ import model.exceptions.TeacherNotCompletedTrainingException;
  */
 @JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class PTTDirector extends Employee {
 
     private TeachRequestMap teachRequestMap;

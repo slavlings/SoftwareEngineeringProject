@@ -1,5 +1,6 @@
 package model;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
@@ -22,6 +23,7 @@ public class InputOutput {
         ObjectMapper mapper = new ObjectMapper();
         mapper.enableDefaultTyping();
 
+
         try {
 
             mapper.writeValue(new File(FILE_PATH_STRING), dataWrapper);
@@ -35,6 +37,7 @@ public class InputOutput {
     public DataWrapper readFromJSON() {
         ObjectMapper mapper = new ObjectMapper();
         mapper.enableDefaultTyping();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
 
         DataWrapper dataWrapper = null;
         try {

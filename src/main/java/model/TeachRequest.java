@@ -9,6 +9,7 @@ import model.exceptions.TeacherNotCompletedTrainingException;
  */
 @JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class TeachRequest {
     private Course requestedCourse;
     private Teacher proposedTeacher;

@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.*;
  */
 @JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+@JsonIgnoreProperties(ignoreUnknown=true)
 public abstract class Employee {
 
     private final String name;
