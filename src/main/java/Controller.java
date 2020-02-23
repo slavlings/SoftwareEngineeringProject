@@ -4,6 +4,7 @@ import model.exceptions.NoTeachRequirementsSetException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.HashMap;
 
 public class Controller {
 
@@ -166,7 +167,79 @@ public class Controller {
     }
 
     public void pttDirectorSubMenu() {
+        while (true) {
+            System.out.println("Pick action:");
+            System.out.println("-1 -> QUIT");
+            System.out.println("0 -> Go Back");
+            System.out.println("1 -> Approve teaching request");
+            int userInput;
+            if (scanner.hasNextInt()) {
+                userInput = scanner.nextInt();
+                if (userInput == 0) {
+                    break;
+                } else {
+                    switch (userInput) {
+                        case -1:
+                            quit();
+                            break;
 
+                        case 1:
+                            approveTeachRequestSubMenu();
+                            break;
+
+                        default:
+                            continue;
+                    }
+                }
+            }
+        }
+    }
+
+    public void completeTrainingSubMenu() {
+        System.out.println("Which teacher do you want to complete for?");
+        System.out.println("Type in teacher's name or 0 to go back.");
+        String userInput = null;
+        Teacher selectedTeacher = null;
+
+        while (true) {
+            userInput = scanner.nextLine();
+            selectedTeacher = getTeacher(userInput);
+            if (selectedTeacher != null || userInput.equals("0")) {
+                break;
+            }
+            System.out.println("No teacher match found. Try again.");
+        }
+
+        if (selectedTeacher != null) {
+            List<String> uncompletedTrainings = selectedTeacher.getUncompletedTrainings();
+            if ((uncompletedTrainings.isEmpty()) || (uncompletedTrainings == null)) {
+                System.out.println("There are no uncompleted trainings for the teacher.");
+            } else {
+                System.out.println("There are following uncompleted trainings for this teacher.");
+                System.out.println("Which one do you want to mark as completed? ");
+                System.out.println("Select index or 0 to go back");
+                int index = 1;
+                for (String training : uncompletedTrainings) {
+                    System.out.println(index++ + training);
+                }
+                int intUserInput;
+                while (true) {
+                    if (scanner.hasNextInt()) {
+                        intUserInput = scanner.nextInt();
+                        intUserInput--;
+                        if (intUserInput >= -1 && intUserInput < uncompletedTrainings.size()) {
+                            break;
+                        }
+                    }
+                    System.out.println("Incorrect input. Try again.");
+                }
+                if (intUserInput > -1) {
+                    String selectedTraining = uncompletedTrainings.get(intUserInput);
+                    selectedTeacher.completeTraining(selectedTraining);
+                    System.out.println("Training has been completed.");
+                }
+            }
+        }
     }
 
     public void classDirectorSubMenu() {
@@ -197,4 +270,16 @@ public class Controller {
         }
         return null;
     }
+
+    private Teacher getTeacher(String teacherName) {
+        for(Teacher teacher: teachers) {
+            if(teacherName.equals(teacher.toString())) {
+                return teacher;
+            }
+        }
+
+        return null;
+    }
+
+
 }
