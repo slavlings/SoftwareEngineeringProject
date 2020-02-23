@@ -1,8 +1,6 @@
 package model;
 
-import model.exceptions.NonExistentTeachRequestException;
-import model.exceptions.TeachRequestAlreadyGivenException;
-import model.exceptions.TeacherNotSuitableForCourseException;
+import model.exceptions.*;
 
 import java.util.HashMap;
 
@@ -13,7 +11,7 @@ import java.util.HashMap;
  */
 public class TeachRequestMap {
 
-    HashMap<String, TeachRequest> teachRequestMap;
+    private HashMap<String, TeachRequest> teachRequestMap;
 
     /**
      * Constructor.
@@ -47,7 +45,9 @@ public class TeachRequestMap {
      * @throws TeacherNotSuitableForCourseException the teacher is not suitable for the course
      */
     public void proposeTeacher(Course course, Teacher teacher) throws NonExistentTeachRequestException, TeacherNotSuitableForCourseException {
-        if (!teachRequestMap.containsKey(course.toString())) {
+        String courseName = course.toString();
+
+        if (!teachRequestMap.containsKey(courseName)) {
             //there is no teaching request for the given course
             throw new NonExistentTeachRequestException();
         } else if (!teacher.satisfiesTeachReqs(course)) {
@@ -55,30 +55,34 @@ public class TeachRequestMap {
             throw new TeacherNotSuitableForCourseException();
         } else {
             //propose the teacher
-            TeachRequest request = teachRequestMap.get(course.toString());
+            TeachRequest request = teachRequestMap.get(courseName);
             request.proposeTeacher(teacher);
         }
     }
 
     /**
      * Attempts to approve a teaching request for the given course.
-     * If unsuccessful, throws an exception or prints the stack trace
-     * for a caught exception.
+     * If unsuccessful, throws an exception.
      * @param course given course
      * @throws NonExistentTeachRequestException the teaching request does not exist
+     * @throws NoProposedTeacherException there is no proposed teacher
+     * @throws TeacherNotCompletedTrainingException the proposed teacher hasn't completed the required training
      */
-    public void approveTeachRequest(Course course) throws NonExistentTeachRequestException {
-        if (!teachRequestMap.containsKey(course.toString())) {
+    public void approveTeachRequest(Course course) throws NonExistentTeachRequestException, NoProposedTeacherException, TeacherNotCompletedTrainingException {
+
+        String courseName = course.toString();
+
+        if (!teachRequestMap.containsKey(courseName)) {
             //there is no teaching request for the given course
             throw new NonExistentTeachRequestException();
         } else {
             //try to approve the request and print any exception trace if unsuccessful
-            TeachRequest request = teachRequestMap.get(course.toString());
+            TeachRequest request = teachRequestMap.get(courseName);
             try {
                 request.approve();
-                teachRequestMap.remove(course.toString());
+                teachRequestMap.remove(courseName);
             } catch (Exception e) {
-                e.printStackTrace();
+                throw e;
             }
         }
     }
