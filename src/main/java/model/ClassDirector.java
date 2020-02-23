@@ -10,7 +10,7 @@ import java.util.List;
  * can set the teaching requirements for it
  * and can produce a teaching request.
  */
-@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id", scope = ClassDirector.class)
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class ClassDirector extends Employee {
@@ -51,5 +51,13 @@ public class ClassDirector extends Employee {
 
     public void setDirectedCourse(Course directedCourse) {
         this.directedCourse = directedCourse;
+    }
+
+    public Course getDirectedCourse() {
+        return directedCourse;
+    }
+
+    public TeachRequestMap getTeachRequestMap() {
+        return teachRequestMap;
     }
 }

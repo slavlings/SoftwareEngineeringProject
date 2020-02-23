@@ -7,7 +7,7 @@ import model.exceptions.TeacherNotCompletedTrainingException;
 /**
  * Represents a teaching request, which corresponds to a particular course and may have a proposed teacher.
  */
-@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id", scope = TeachRequest.class)
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class TeachRequest {
@@ -54,5 +54,13 @@ public class TeachRequest {
             requestedCourse.setTeacher(proposedTeacher);
             proposedTeacher.setCourse(requestedCourse);
         }
+    }
+
+    public Course getRequestedCourse() {
+        return requestedCourse;
+    }
+
+    public Teacher getProposedTeacher() {
+        return proposedTeacher;
     }
 }
