@@ -12,7 +12,7 @@ import java.util.List;
  * Represents an Admin.
  * Has functionality for finding suitable staff, proposing teacher and adding/completing trainings for teachers
  */
-@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id", scope=Admin.class)
+@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Admin extends Employee {
 
     private TeachRequestMap teachRequestMap;

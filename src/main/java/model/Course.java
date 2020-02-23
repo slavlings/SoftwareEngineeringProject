@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Holds information about the name, teaching requirements, term the course is taught in and teacher
  * Holds information about required training name for comparisons
  */
-@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id", scope=Course.class)
+@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Course {
     private String name;
     private List<String> teachRequirements;

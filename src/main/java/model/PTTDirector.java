@@ -10,7 +10,7 @@ import model.exceptions.TeacherNotCompletedTrainingException;
  * Represents a PTTDirector.
  * Has functionality for approving teaching requests.
  */
-@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id", scope=PTTDirector.class)
+@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class PTTDirector extends Employee {
 
     private TeachRequestMap teachRequestMap;
