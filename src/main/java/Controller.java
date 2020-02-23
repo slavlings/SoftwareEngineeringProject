@@ -143,6 +143,8 @@ public class Controller {
                     try {
                         System.out.println("Proposal successful.");
                         admin.proposeTeacher(course, proposedTeacher);
+                        System.out.println("Do you want to assign training to the proposed teacher?");
+                        
                     } catch (Exception e) {
                         System.out.println("Proposal unsuccessful.");
                         System.out.println(e.getMessage());
@@ -170,6 +172,16 @@ public class Controller {
         for (Course course : courses) {
             if (course.toString().equals(name)) {
                 return course;
+            }
+        }
+        return null;
+    }
+
+    private ClassDirector getClassDirector(String courseName) {
+
+        for(ClassDirector classDirector: courseDirectors) {
+            if(courseName.equals(classDirector.getDirectedCourse().toString())) {
+                return classDirector;
             }
         }
         return null;
