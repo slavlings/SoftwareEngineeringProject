@@ -1,10 +1,12 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import model.exceptions.NoTeachRequirementsSetException;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id", scope=Teacher.class)
 public class Teacher extends Employee{
 
     private List<String> skills;

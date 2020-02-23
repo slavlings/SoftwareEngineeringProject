@@ -1,5 +1,7 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import model.exceptions.*;
 
 import java.util.HashMap;
@@ -9,6 +11,7 @@ import java.util.HashMap;
  * Adds functionality for adding and approving teaching requests,
  * and proposing teachers.
  */
+@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id", scope=TeachRequestMap.class)
 public class TeachRequestMap {
 
     private HashMap<String, TeachRequest> teachRequestMap;
@@ -36,6 +39,7 @@ public class TeachRequestMap {
         }
     }
 
+
     /**
      * Attempt to propose the given teacher for a teaching request associated with the given course.
      * Throws an exception if unsuccessful.
@@ -43,8 +47,9 @@ public class TeachRequestMap {
      * @param teacher given teacher
      * @throws NonExistentTeachRequestException the teaching request does not exist
      * @throws TeacherNotSuitableForCourseException the teacher is not suitable for the course
+     * @throws NoTeachRequirementsSetException the course doesn't have teaching requirements set
      */
-    public void proposeTeacher(Course course, Teacher teacher) throws NonExistentTeachRequestException, TeacherNotSuitableForCourseException {
+    public void proposeTeacher(Course course, Teacher teacher) throws NonExistentTeachRequestException, TeacherNotSuitableForCourseException, NoTeachRequirementsSetException {
         String courseName = course.toString();
 
         if (!teachRequestMap.containsKey(courseName)) {

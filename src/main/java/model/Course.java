@@ -1,5 +1,7 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import model.exceptions.NoTeachRequirementsSetException;
 
 import java.util.List;
@@ -10,7 +12,7 @@ import java.util.ArrayList;
  * Holds information about the name, teaching requirements, term the course is taught in and teacher
  * Holds information about required training name for comparisons
  */
-
+@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id", scope=Course.class)
 public class Course {
     private String name;
     private List<String> teachRequirements;

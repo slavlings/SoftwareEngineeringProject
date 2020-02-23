@@ -1,5 +1,7 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import model.exceptions.NoProposedTeacherException;
 import model.exceptions.NonExistentTeachRequestException;
 import model.exceptions.TeacherNotCompletedTrainingException;
@@ -8,6 +10,7 @@ import model.exceptions.TeacherNotCompletedTrainingException;
  * Represents a PTTDirector.
  * Has functionality for approving teaching requests.
  */
+@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id", scope=PTTDirector.class)
 public class PTTDirector extends Employee {
 
     private TeachRequestMap teachRequestMap;

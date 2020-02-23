@@ -1,5 +1,7 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import model.exceptions.TeachRequestAlreadyGivenException;
 
 import java.util.List;
@@ -9,7 +11,7 @@ import java.util.List;
  * can set the teaching requirements for it
  * and can produce a teaching request.
  */
-
+@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id", scope=ClassDirector.class)
 public class ClassDirector extends Employee {
     private Course directedCourse;
     private TeachRequestMap teachRequestMap;

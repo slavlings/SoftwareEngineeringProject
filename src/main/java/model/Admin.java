@@ -1,5 +1,7 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import model.exceptions.*;
 
 import java.util.LinkedList;
@@ -10,7 +12,7 @@ import java.util.List;
  * Represents an Admin.
  * Has functionality for finding suitable staff, proposing teacher and adding/completing trainings for teachers
  */
-
+@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id", scope=Admin.class)
 public class Admin extends Employee {
 
     private TeachRequestMap teachRequestMap;
@@ -35,6 +37,14 @@ public class Admin extends Employee {
      * @param teacherList list of all teachers
      * @return list of suitable teachers
      */
+    /**
+     * Attempts to find a list of teachers that are suitable for a specific course by satisfying the skill requirements for the course.
+     * Throws an exception if the course doesn't have teaching requirements set.
+     * @param course
+     * @param teacherList
+     * @return LinkedList of suitable teachers
+     * @throws NoTeachRequirementsSetException the course doesn't have teaching requirements set
+     */
     public LinkedList<Teacher> findSuitableStaff(Course course, List<Teacher> teacherList) throws NoTeachRequirementsSetException {
         LinkedList<Teacher> suitableTeacherList = new LinkedList<Teacher>();
         for (int i = 0; i < teacherList.size(); i++) {
@@ -53,8 +63,9 @@ public class Admin extends Employee {
      * @param teacher given teacher
      * @throws TeacherNotSuitableForCourseException the teacher is not suitable for the course
      * @throws NonExistentTeachRequestException there is no teaching request for the given course
+     * @throws NoTeachRequirementsSetException there are no teaching requirements set for the course
      */
-    public void proposeTeacher(Course course, Teacher teacher) throws TeacherNotSuitableForCourseException, NonExistentTeachRequestException {
+    public void proposeTeacher(Course course, Teacher teacher) throws TeacherNotSuitableForCourseException, NonExistentTeachRequestException, NoTeachRequirementsSetException {
 
         teachRequestMap.proposeTeacher(course, teacher);
 
