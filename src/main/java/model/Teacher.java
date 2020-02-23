@@ -2,18 +2,20 @@ package model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import model.exceptions.NoTeachRequirementsSetException;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Teacher extends Employee{
 
     private List<String> skills;
     private List<String> completedTrainings;
     private List<String> uncompletedTrainings;
     private Course taughtCourse;
+
 
     public Teacher(String name) {
         super(name);

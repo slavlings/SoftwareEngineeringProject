@@ -11,7 +11,6 @@ import java.util.HashMap;
  * Adds functionality for adding and approving teaching requests,
  * and proposing teachers.
  */
-@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class TeachRequestMap {
 
     HashMap<String, TeachRequest> teachRequestMap;

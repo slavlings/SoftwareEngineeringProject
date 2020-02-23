@@ -3,6 +3,8 @@ package model;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import model.exceptions.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -12,7 +14,6 @@ import java.util.List;
  * Represents an Admin.
  * Has functionality for finding suitable staff, proposing teacher and adding/completing trainings for teachers
  */
-@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Admin extends Employee {
 
     private TeachRequestMap teachRequestMap;

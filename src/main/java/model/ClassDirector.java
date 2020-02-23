@@ -11,7 +11,6 @@ import java.util.List;
  * can set the teaching requirements for it
  * and can produce a teaching request.
  */
-@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class ClassDirector extends Employee {
     private Course directedCourse;
     private TeachRequestMap teachRequestMap;

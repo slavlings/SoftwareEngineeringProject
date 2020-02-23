@@ -8,7 +8,6 @@ import model.exceptions.TeacherNotCompletedTrainingException;
 /**
  * Represents a teaching request, which corresponds to a particular course and may have a proposed teacher.
  */
-@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class TeachRequest {
     private Course requestedCourse;
     private Teacher proposedTeacher;
