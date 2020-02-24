@@ -396,6 +396,7 @@ public class Controller {
             }
             if(userInput.equals("1")) {
                 selectedCourseDirector.setCourseTeachRequirements(skillsToAdd);
+                break;
             }
             if(userInput.equals("0")) {
                 break;
