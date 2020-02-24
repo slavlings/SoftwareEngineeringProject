@@ -49,7 +49,7 @@ public class Main {
 //
 //        //setting teacher skills
 //        t1.setSkills(skills1);
-////        t2.setSkills(skills2);
+//        t2.setSkills(skills2);
 //
 //        //setting teachReqs
 //        cd1.setCourseTeachRequirements(teachRequirements1);
@@ -88,7 +88,8 @@ public class Main {
 //        InputOutput io = InputOutput.getInstance();
 //        io.writeToJSON(dataWrapper);
 //        DataWrapper dataWrapper2 = io.readFromJSON();
-//        System.out.println("test");
+
+
         Controller c = new Controller();
         c.start();
     }

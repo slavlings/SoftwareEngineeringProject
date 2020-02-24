@@ -15,9 +15,9 @@ public class Controller {
     private Admin admin;
     private Scanner scanner;
     private ClassDirector selectedClassDirector;
+    private InputOutput io = InputOutput.getInstance();
 
     public Controller() {
-        InputOutput io = InputOutput.getInstance();
         DataWrapper dataWrapper = io.readFromJSON();
         teachers = dataWrapper.getTeachers();
         courses = dataWrapper.getCourses();
@@ -222,7 +222,7 @@ public class Controller {
                 System.out.println("Select index or 0 to go back");
                 int index = 1;
                 for (String training : uncompletedTrainings) {
-                    System.out.println(index++ + training);
+                    System.out.println(index++ + ": " + training);
                 }
                 int intUserInput;
                 while (true) {
@@ -410,6 +410,7 @@ public class Controller {
 
     public void quit() {
         DataWrapper dataWrapper = new DataWrapper(teachers, courses, courseDirectors, admin, pttDirector);
+        io.writeToJSON(dataWrapper);
         System.exit(0);
     }
 
