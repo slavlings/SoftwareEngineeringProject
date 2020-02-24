@@ -7,7 +7,7 @@ import model.exceptions.TeacherNotCompletedTrainingException;
 /**
  * Represents a teaching request, which corresponds to a particular course and may have a proposed teacher.
  */
-@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id", scope = TeachRequest.class)
+@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class TeachRequest {

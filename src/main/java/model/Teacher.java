@@ -6,7 +6,7 @@ import model.exceptions.NoTeachRequirementsSetException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id", scope = Teacher.class)
+@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Teacher extends Employee{
@@ -22,8 +22,6 @@ public class Teacher extends Employee{
         this.completedTrainings = completedTrainings;
         this.uncompletedTrainings = uncompletedTrainings;
     }
-
-
 
     public Teacher(String name) {
         super(name);
@@ -93,12 +91,4 @@ public class Teacher extends Employee{
         return uncompletedTrainings;
     }
 
-    public Course getTaughtCourse() {
-        return taughtCourse;
-    }
-
-    @Override
-    public int getId() {
-        return id;
-    }
 }

@@ -10,7 +10,7 @@ import java.util.List;
  * can set the teaching requirements for it
  * and can produce a teaching request.
  */
-@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id", scope = ClassDirector.class)
+@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class ClassDirector extends Employee {

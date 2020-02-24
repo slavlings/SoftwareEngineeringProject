@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.*;
 /**
  * Base Employee class.
  */
-@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id", scope = Employee.class)
+@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @JsonIgnoreProperties(ignoreUnknown=true)
 public abstract class Employee {

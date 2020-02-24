@@ -37,6 +37,7 @@ public class Controller {
             int userInput;
             if (scanner.hasNextInt()) {
                 userInput = scanner.nextInt();
+                scanner.nextLine();
                 switch (userInput) {
                     case -1:
                         quit();
@@ -72,6 +73,7 @@ public class Controller {
             int userInput;
             if (scanner.hasNextInt()) {
                 userInput = scanner.nextInt();
+                scanner.nextLine();
                 if (userInput == 0) {
                     break;
                 } else {
@@ -133,6 +135,7 @@ public class Controller {
                 while (true) {
                     if (scanner.hasNextInt()) {
                         intUserInput = scanner.nextInt();
+                        scanner.nextLine();
                         intUserInput--;
                         if (intUserInput >= -1 && intUserInput < suitableTeachers.size()) {
                             break;
@@ -176,6 +179,7 @@ public class Controller {
             int userInput;
             if (scanner.hasNextInt()) {
                 userInput = scanner.nextInt();
+                scanner.nextLine();
                 if (userInput == 0) {
                     break;
                 } else {
@@ -224,6 +228,7 @@ public class Controller {
                 while (true) {
                     if (scanner.hasNextInt()) {
                         intUserInput = scanner.nextInt();
+                        scanner.nextLine();
                         intUserInput--;
                         if (intUserInput >= -1 && intUserInput < uncompletedTrainings.size()) {
                             break;
@@ -281,6 +286,7 @@ public class Controller {
             int userInput;
             if (scanner.hasNextInt()) {
                 userInput = scanner.nextInt();
+                scanner.nextLine();
                 if (userInput == 0) {
                     break;
                 } else {
@@ -336,6 +342,7 @@ public class Controller {
             int userInput;
             if (scanner.hasNextInt()) {
                 userInput = scanner.nextInt();
+                scanner.nextLine();
                 if (userInput == 0) {
                     break;
                 } else {
@@ -388,7 +395,7 @@ public class Controller {
     }
 
 
-    public void addTeacherRequest() throws TeachRequestAlreadyGivenException {
+    public void addTeacherRequest() {
         TeachRequestMap classDirectorTeachRequestMap = selectedClassDirector.getTeachRequestMap();
 
         try {
