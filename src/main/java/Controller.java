@@ -58,6 +58,8 @@ public class Controller {
                     default:
                         continue;
                 }
+            } else {
+                scanner.nextLine();
             }
 
         }
@@ -94,6 +96,8 @@ public class Controller {
                             continue;
                     }
                 }
+            } else {
+                scanner.nextLine();
             }
         }
     }
@@ -140,6 +144,8 @@ public class Controller {
                         if (intUserInput >= -1 && intUserInput < suitableTeachers.size()) {
                             break;
                         }
+                    } else {
+                        scanner.nextLine();
                     }
                     System.out.println("Incorrect input. Try again.");
                 }
@@ -193,6 +199,8 @@ public class Controller {
                             break;
                     }
                 }
+            } else {
+                scanner.nextLine();
             }
         }
     }
@@ -233,6 +241,8 @@ public class Controller {
                         if (intUserInput >= -1 && intUserInput < uncompletedTrainings.size()) {
                             break;
                         }
+                    } else {
+                        scanner.nextLine();
                     }
                     System.out.println("Incorrect input. Try again.");
                 }
@@ -303,6 +313,8 @@ public class Controller {
                             continue;
                     }
                 }
+            } else {
+                scanner.nextLine();
             }
         }
     }
@@ -363,6 +375,8 @@ public class Controller {
                             continue;
                     }
                 }
+            } else {
+                scanner.nextLine();
             }
         }
     }
