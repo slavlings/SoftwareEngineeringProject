@@ -13,12 +13,12 @@ import java.util.List;
 @JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class ClassDirector extends Employee {
+public class CourseDirector extends Employee {
     private Course directedCourse;
     private TeachRequestMap teachRequestMap;
 
     @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
-    public ClassDirector(@JsonProperty("name") String name,@JsonProperty("directedCourse") Course directedCourse,@JsonProperty("teachRequestMap") TeachRequestMap teachRequestMap) {
+    public CourseDirector(@JsonProperty("name") String name, @JsonProperty("directedCourse") Course directedCourse, @JsonProperty("teachRequestMap") TeachRequestMap teachRequestMap) {
         super(name);
         this.directedCourse = directedCourse;
         this.teachRequestMap = teachRequestMap;
@@ -29,7 +29,7 @@ public class ClassDirector extends Employee {
      *  @param name name of class director
      *  @param teachRequestMap holds teaching requests
      */
-    public ClassDirector(String name, TeachRequestMap teachRequestMap) {
+    public CourseDirector(String name, TeachRequestMap teachRequestMap) {
         super(name);
         this.teachRequestMap = teachRequestMap;
     }

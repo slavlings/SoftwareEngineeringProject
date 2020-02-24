@@ -4,24 +4,23 @@ import model.exceptions.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.HashMap;
 
 public class Controller {
 
     private List<Teacher> teachers;
     private List<Course> courses;
-    private List<ClassDirector> courseDirectors;
+    private List<CourseDirector> courseDirectors;
     private PTTDirector pttDirector;
     private Admin admin;
     private Scanner scanner;
-    private ClassDirector selectedClassDirector = null;
+    private CourseDirector selectedCourseDirector = null;
     private InputOutput io = InputOutput.getInstance();
 
     public Controller() {
         DataWrapper dataWrapper = io.readFromJSON();
         teachers = dataWrapper.getTeachers();
         courses = dataWrapper.getCourses();
-        courseDirectors = dataWrapper.getClassDirectors();
+        courseDirectors = dataWrapper.getCourseDirectors();
         pttDirector = dataWrapper.getPttDirector();
         admin = dataWrapper.getAdmin();
         scanner = new Scanner(System.in);
@@ -327,13 +326,13 @@ public class Controller {
             if(userInput.equals("-1")) {
                 quit();
             }
-            selectedClassDirector = getClassDirector(userInput);
-            if (selectedClassDirector != null) {
+            selectedCourseDirector = getClassDirector(userInput);
+            if (selectedCourseDirector != null) {
                 break;
             }
             System.out.println("No course match found. Try again.");
         }
-        if(selectedClassDirector != null) {
+        if(selectedCourseDirector != null) {
             specificClassDirectorSubMenu();
         }
     }
@@ -396,7 +395,10 @@ public class Controller {
                 }
             }
             if(userInput.equals("1")) {
-                selectedClassDirector.setCourseTeachRequirements(skillsToAdd);
+                selectedCourseDirector.setCourseTeachRequirements(skillsToAdd);
+            }
+            if(userInput.equals("0")) {
+                break;
             }
         }
     }
@@ -404,8 +406,8 @@ public class Controller {
 
     public void addTeacherRequest() {
         try {
-            selectedClassDirector.addTeachRequest();
-            System.out.println("You have added a teach request for the course " + selectedClassDirector.getDirectedCourse());
+            selectedCourseDirector.addTeachRequest();
+            System.out.println("You have added a teach request for the course " + selectedCourseDirector.getDirectedCourse());
         } catch (TeachRequestAlreadyGivenException e) {
             System.out.println(e.getMessage());
         }
@@ -429,11 +431,11 @@ public class Controller {
         return null;
     }
 
-    private ClassDirector getClassDirector(String courseName) {
+    private CourseDirector getClassDirector(String courseName) {
 
-        for(ClassDirector classDirector: courseDirectors) {
-            if(courseName.equals(classDirector.getDirectedCourse().toString())) {
-                return classDirector;
+        for(CourseDirector courseDirector : courseDirectors) {
+            if(courseName.equals(courseDirector.getDirectedCourse().toString())) {
+                return courseDirector;
             }
         }
         return null;
