@@ -38,7 +38,7 @@ public class TeachRequestMapTest {
             doThrow(new NoProposedTeacherException()).when(teachRequest).approve();
 
             //add teachRequest to the underlying map under CourseName
-            HashMap<String,TeachRequest> teachRequestMap = new HashMap<>();
+            HashMap<String, TeachRequest> teachRequestMap = new HashMap<>();
             teachRequestMap.put("CourseName", teachRequest);
             TeachRequestMap teachRequestMapWrapper = new TeachRequestMap(teachRequestMap);
 
@@ -66,7 +66,7 @@ public class TeachRequestMapTest {
             doThrow(new TeacherNotCompletedTrainingException()).when(teachRequest).approve();
 
             //add teachRequest to the underlying map under CourseName
-            HashMap<String,TeachRequest> teachRequestMap = new HashMap<>();
+            HashMap<String, TeachRequest> teachRequestMap = new HashMap<>();
             teachRequestMap.put("CourseName", teachRequest);
             TeachRequestMap teachRequestMapWrapper = new TeachRequestMap(teachRequestMap);
 
@@ -92,7 +92,7 @@ public class TeachRequestMapTest {
             TeachRequest teachRequest = mock(TeachRequest.class);
 
             //add teachRequest to the underlying map under CourseName
-            HashMap<String,TeachRequest> teachRequestMap = new HashMap<>();
+            HashMap<String, TeachRequest> teachRequestMap = new HashMap<>();
             teachRequestMap.put("CourseName", teachRequest);
             TeachRequestMap teachRequestMapWrapper = new TeachRequestMap(teachRequestMap);
 
@@ -142,7 +142,7 @@ public class TeachRequestMapTest {
             when(teacher.satisfiesTeachReqs(course)).thenReturn(false);
 
             //add teachRequest to the underlying map under CourseName
-            HashMap<String,TeachRequest> teachRequestMap = new HashMap<>();
+            HashMap<String, TeachRequest> teachRequestMap = new HashMap<>();
             teachRequestMap.put("CourseName", teachRequest);
             TeachRequestMap teachRequestMapWrapper = new TeachRequestMap(teachRequestMap);
 
@@ -165,7 +165,7 @@ public class TeachRequestMapTest {
             when(teacher.satisfiesTeachReqs(course)).thenReturn(true);
 
             //add teachRequest to the underlying map under CourseName
-            HashMap<String,TeachRequest> teachRequestMap = new HashMap<>();
+            HashMap<String, TeachRequest> teachRequestMap = new HashMap<>();
             teachRequestMap.put("CourseName", teachRequest);
             TeachRequestMap teachRequestMapWrapper = new TeachRequestMap(teachRequestMap);
 
@@ -188,7 +188,7 @@ public class TeachRequestMapTest {
             when(course.toString()).thenReturn("CourseName");
 
             //add new TeachRequest for course to the underlying map under CourseName
-            HashMap<String,TeachRequest> teachRequestMap = new HashMap<>();
+            HashMap<String, TeachRequest> teachRequestMap = new HashMap<>();
             teachRequestMap.put("CourseName", new TeachRequest(course));
             TeachRequestMap teachRequestMapWrapper = new TeachRequestMap(teachRequestMap);
 
@@ -198,7 +198,7 @@ public class TeachRequestMapTest {
         @DisplayName("If the TeachRequest is new, it should be added to the map.")
         @Test
         public void newTeachRequest() throws TeachRequestAlreadyGivenException {
-            HashMap<String,TeachRequest> teachRequestMap = new HashMap<>();
+            HashMap<String, TeachRequest> teachRequestMap = new HashMap<>();
             TeachRequestMap teachRequestMapWrapper = new TeachRequestMap(teachRequestMap);
             Course course = mock(Course.class);
 
