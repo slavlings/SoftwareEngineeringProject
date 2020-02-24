@@ -9,7 +9,7 @@ import model.exceptions.TeacherNotCompletedTrainingException;
  * Represents a PTTDirector.
  * Has functionality for approving teaching requests.
  */
-@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id", scope = PTTDirector.class)
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class PTTDirector extends Employee {
@@ -36,5 +36,9 @@ public class PTTDirector extends Employee {
      */
     public void approveTeachRequest(Course course) throws NonExistentTeachRequestException, NoProposedTeacherException, TeacherNotCompletedTrainingException {
         teachRequestMap.approveTeachRequest(course);
+    }
+
+    public TeachRequestMap getTeachRequestMap() {
+        return teachRequestMap;
     }
 }

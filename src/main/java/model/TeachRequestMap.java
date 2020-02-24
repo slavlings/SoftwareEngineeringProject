@@ -10,7 +10,7 @@ import java.util.HashMap;
  * Adds functionality for adding and approving teaching requests,
  * and proposing teachers.
  */
-@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id", scope = TeachRequestMap.class)
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class TeachRequestMap {
@@ -97,4 +97,17 @@ public class TeachRequestMap {
             }
         }
     }
+
+    public HashMap<String, TeachRequest> getTeachRequestMap() {
+        return teachRequestMap;
+    }
+
+    public boolean isEmpty() {
+        if (this.teachRequestMap.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
+
 }
