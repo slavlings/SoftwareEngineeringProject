@@ -378,7 +378,7 @@ public class Controller {
     private void setCourseTeachingRequirements() {
         LinkedList<String> skillsToAdd = new LinkedList<String>();
         while (true) {
-            System.out.println("Type in skills for teaching requirements - type a skill, then enter and finish by pressing 1. You can type in as many skills as you want.");
+            System.out.println("Type in skills for teaching requirements - type a skill and press enter to insert. You can type in as many skills as you want. Finish by pressing 1. ");
             System.out.println("-1 -> QUIT");
             System.out.println("0 -> Go Back");
             System.out.println("1 -> Finish adding");
