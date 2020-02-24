@@ -37,7 +37,7 @@ public class InputOutput {
     public DataWrapper readFromJSON() {
         ObjectMapper mapper = new ObjectMapper();
         mapper.enableDefaultTyping();
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+//        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
 
         DataWrapper dataWrapper = null;
         try {

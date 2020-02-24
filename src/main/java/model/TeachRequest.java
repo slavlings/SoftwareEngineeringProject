@@ -52,7 +52,6 @@ public class TeachRequest {
         } else {
             //approve the request
             requestedCourse.setTeacher(proposedTeacher);
-            proposedTeacher.setCourse(requestedCourse);
         }
     }
 }
