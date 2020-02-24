@@ -1,8 +1,5 @@
 import model.*;
-import model.exceptions.NoProposedTeacherException;
-import model.exceptions.NoTeachRequirementsSetException;
-import model.exceptions.NonExistentTeachRequestException;
-import model.exceptions.TeacherNotCompletedTrainingException;
+import model.exceptions.*;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -17,6 +14,7 @@ public class Controller {
     private PTTDirector pttDirector;
     private Admin admin;
     private Scanner scanner;
+    private ClassDirector selectedClassDirector;
 
     public Controller() {
         InputOutput io = InputOutput.getInstance();
@@ -275,8 +273,133 @@ public class Controller {
     }
 
     public void classDirectorSubMenu() {
+        while (true) {
+            System.out.println("Pick action:");
+            System.out.println("-1 -> QUIT");
+            System.out.println("0 -> Go Back");
+            System.out.println("1 -> Select Your Course");
+            int userInput;
+            if (scanner.hasNextInt()) {
+                userInput = scanner.nextInt();
+                if (userInput == 0) {
+                    break;
+                } else {
+                    switch (userInput) {
+                        case -1:
+                            quit();
+                            break;
 
+                        case 1:
+                            selectClassDirectorSubMenu();
+                            break;
+
+                        default:
+                            continue;
+                    }
+                }
+            }
+        }
     }
+
+    public void selectClassDirectorSubMenu() {
+        while (true) {
+            System.out.println("Which course are you teaching?");
+            System.out.println("Type in 0 to go back or -1 to quit");
+            String userInput = null;
+            ClassDirector selectedClassDirector = null;
+
+            userInput = scanner.nextLine();
+            if (userInput.equals("-1")) {
+                quit();
+            }
+
+            if (userInput.equals("0")) {
+                classDirectorSubMenu();
+            }
+            selectedClassDirector = getClassDirector(userInput);
+            if (selectedClassDirector != null) {
+                break;
+            }
+            System.out.println("No course match found. Try again.");
+        }
+        specificClassDirectorSubMenu();
+    }
+
+    public void specificClassDirectorSubMenu() {
+        while (true) {
+            System.out.println("Pick action:");
+            System.out.println("-1 -> QUIT");
+            System.out.println("0 -> Go Back");
+            System.out.println("1 -> Set course teaching requirements");
+            System.out.println("2 -> Add teacher request");
+
+            int userInput;
+            if (scanner.hasNextInt()) {
+                userInput = scanner.nextInt();
+                if (userInput == 0) {
+                    break;
+                } else {
+                    switch (userInput) {
+                        case -1:
+                            quit();
+                            break;
+
+                        case 1:
+                            setCourseTeachingRequirements();
+                            break;
+
+                        case 2:
+                            addTeacherRequest();
+                            break;
+
+                        default:
+                            continue;
+                    }
+                }
+            }
+        }
+    }
+
+    public void setCourseTeachingRequirements() {
+        LinkedList<String> skillsToAdd = new LinkedList<String>();
+        while (true) {
+            System.out.println("Type in skills for teaching requirements - type a skill, then enter and finish by pressing 1. You can type in as many skills as you want");
+            System.out.println("-1 -> QUIT");
+            System.out.println("0 -> Go Back");
+            System.out.println("1 -> Finish adding");
+
+            String userInput = null;
+            while (true) {
+                userInput = scanner.nextLine();
+                if (userInput.equals("-1")) {
+                    quit();
+                } else if (userInput.equals("0")) {
+                    specificClassDirectorSubMenu();
+                } else if (userInput.equals("1")) {
+                    break;
+                } else if (userInput.equals("")) {
+                    System.out.println("No skill entered - please enter a skill");
+                } else {
+                    skillsToAdd.add(userInput);
+                }
+            }
+            selectedClassDirector.setCourseTeachRequirements(skillsToAdd);
+        }
+    }
+
+
+    public void addTeacherRequest() throws TeachRequestAlreadyGivenException {
+        TeachRequestMap classDirectorTeachRequestMap = selectedClassDirector.getTeachRequestMap();
+
+        try {
+            classDirectorTeachRequestMap.addTeachRequest(selectedClassDirector.getDirectedCourse());
+            System.out.println("You have added a teach request for the course " + selectedClassDirector.getDirectedCourse());
+        } catch (TeachRequestAlreadyGivenException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+
 
     public void quit() {
         DataWrapper dataWrapper = new DataWrapper(teachers, courses, courseDirectors, admin, pttDirector);
