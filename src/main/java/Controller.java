@@ -247,7 +247,7 @@ public class Controller {
                 }
                 if (intUserInput > -1) {
                     String selectedTraining = uncompletedTrainings.get(intUserInput);
-                    selectedTeacher.completeTraining(selectedTraining);
+                    admin.completeTraining(selectedTeacher,selectedTraining);
                     System.out.println("Training has been completed.");
                 }
             }
@@ -275,7 +275,7 @@ public class Controller {
 
                 try {
                     availableTeachRequests.approveTeachRequest(course);
-                    System.out.println("You have approved a teaching request for course " + course);
+                    System.out.println("You have approved a teaching request for the course " + course);
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
