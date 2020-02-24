@@ -1,5 +1,8 @@
 import model.*;
+import model.exceptions.NoProposedTeacherException;
 import model.exceptions.NoTeachRequirementsSetException;
+import model.exceptions.NonExistentTeachRequestException;
+import model.exceptions.TeacherNotCompletedTrainingException;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -186,9 +189,6 @@ public class Controller {
                         case 1:
                             approveTeachRequestSubMenu();
                             break;
-
-                        default:
-                            continue;
                     }
                 }
             }
@@ -196,7 +196,7 @@ public class Controller {
     }
 
     public void completeTrainingSubMenu() {
-        System.out.println("Which teacher do you want to complete for?");
+        System.out.println("Which teacher do you want to complete training for?");
         System.out.println("Type in teacher's name or 0 to go back.");
         String userInput = null;
         Teacher selectedTeacher = null;
@@ -238,6 +238,38 @@ public class Controller {
                     selectedTeacher.completeTraining(selectedTraining);
                     System.out.println("Training has been completed.");
                 }
+            }
+        }
+    }
+
+    public void approveTeachRequestSubMenu() {
+        TeachRequestMap availableTeachRequests = pttDirector.getTeachRequestMap();
+        if ((availableTeachRequests == null) || availableTeachRequests.isEmpty()) {
+            System.out.println("No teaching requests to approve were found.");
+        } else {
+            System.out.println("For which course do you want to approve a teaching request?");
+            System.out.println("Type in course name or 0 to go back.");
+            String userInput = null;
+            Course course = null;
+            while (true) {
+                userInput = scanner.nextLine();
+                course = getCourse(userInput);
+                if (course != null || userInput.equals("0")) {
+                    break;
+                }
+                System.out.println("No course match found. Try again.");
+            }
+            if (course != null) {
+            }
+            try {
+                availableTeachRequests.approveTeachRequest(course);
+                System.out.println("You have approved a teaching request for course " + course);
+            } catch (NonExistentTeachRequestException e) {
+                System.out.println(e.getMessage());
+            } catch (NoProposedTeacherException e) {
+                System.out.println(e.getMessage());
+            } catch (TeacherNotCompletedTrainingException e) {
+                System.out.println(e.getMessage());
             }
         }
     }

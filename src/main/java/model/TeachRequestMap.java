@@ -101,4 +101,13 @@ public class TeachRequestMap {
     public HashMap<String, TeachRequest> getTeachRequestMap() {
         return teachRequestMap;
     }
+
+    public boolean isEmpty() {
+        if (this.teachRequestMap.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
+
 }
