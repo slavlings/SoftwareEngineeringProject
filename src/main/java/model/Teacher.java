@@ -44,7 +44,7 @@ public class Teacher extends Employee{
      * @throws TeacherTrainingAlreadyPresentException
      */
     public void addTraining(String training) throws TeacherTrainingAlreadyPresentException {
-        if(uncompletedTrainings.contains(training)) {
+        if(uncompletedTrainings.contains(training) || completedTrainings.contains(training)) {
             throw new TeacherTrainingAlreadyPresentException();
         } else {
             uncompletedTrainings.add(training);
