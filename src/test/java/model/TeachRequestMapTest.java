@@ -5,10 +5,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class TeachRequestMapTest {
+
     @Nested
     @DisplayName("Teacher approval tests")
     public class TeacherApproval {
@@ -28,46 +31,55 @@ public class TeachRequestMapTest {
         @DisplayName("If there is no proposed teacher, the request isn't approved and it isn't removed from the map.")
         @Test
         public void noProposedTeacher() throws NoProposedTeacherException, TeacherNotCompletedTrainingException, NonExistentTeachRequestException {
-            TeachRequestMap teachRequestMap = new TeachRequestMap();
+
             TeachRequest teachRequest = mock(TeachRequest.class);
 
             //teachRequest.approve() throws a NoProposedTeacherException
             doThrow(new NoProposedTeacherException()).when(teachRequest).approve();
 
             //add teachRequest to the underlying map under CourseName
-            teachRequestMap.teachRequestMap.put("CourseName", teachRequest);
+            HashMap<String,TeachRequest> teachRequestMap = new HashMap<>();
+            teachRequestMap.put("CourseName", teachRequest);
+            TeachRequestMap teachRequestMapWrapper = new TeachRequestMap(teachRequestMap);
 
             Course course = mock(Course.class);
             //course's name is CourseName
             when(course.toString()).thenReturn("CourseName");
+
             try {
-                teachRequestMap.approveTeachRequest(course);
+                teachRequestMapWrapper.approveTeachRequest(course);
             }catch (NoProposedTeacherException e) {}
+
             //teachRequest is still in the underlying map
-            assertEquals(teachRequest, teachRequestMap.teachRequestMap.get("CourseName"));
+            assertEquals(teachRequest, teachRequestMap.get("CourseName"));
+
         }
 
         @DisplayName("If the proposed teacher hasn't completed his training, " +
                 "the request isn't approved and it isn't removed from the map.")
         @Test
         public void notCompletedTraining() throws NoProposedTeacherException, TeacherNotCompletedTrainingException, NonExistentTeachRequestException {
-            TeachRequestMap teachRequestMap = new TeachRequestMap();
+
             TeachRequest teachRequest = mock(TeachRequest.class);
 
             //teachRequest.approve() throws a TeacherNotCompletedTrainingException
             doThrow(new TeacherNotCompletedTrainingException()).when(teachRequest).approve();
 
             //add teachRequest to the underlying map under CourseName
-            teachRequestMap.teachRequestMap.put("CourseName", teachRequest);
+            HashMap<String,TeachRequest> teachRequestMap = new HashMap<>();
+            teachRequestMap.put("CourseName", teachRequest);
+            TeachRequestMap teachRequestMapWrapper = new TeachRequestMap(teachRequestMap);
 
             Course course = mock(Course.class);
             //course's name is CourseName
             when(course.toString()).thenReturn("CourseName");
-            try{
-                teachRequestMap.approveTeachRequest(course);
+
+            try {
+                teachRequestMapWrapper.approveTeachRequest(course);
             }catch (TeacherNotCompletedTrainingException e) {}
+
             //teachRequest is still in the underlying map
-            assertEquals(teachRequest, teachRequestMap.teachRequestMap.get("CourseName"));
+            assertEquals(teachRequest, teachRequestMap.get("CourseName"));
         }
 
         @DisplayName("If the proposed teacher has completed his training" +
@@ -75,20 +87,25 @@ public class TeachRequestMapTest {
                 "the request is approved and it is removed from the map.")
         @Test
         public void completedTraining() throws NonExistentTeachRequestException, NoProposedTeacherException, TeacherNotCompletedTrainingException {
-            TeachRequestMap teachRequestMap = new TeachRequestMap();
+
+
             TeachRequest teachRequest = mock(TeachRequest.class);
 
             //add teachRequest to the underlying map under CourseName
-            teachRequestMap.teachRequestMap.put("CourseName", teachRequest);
+            HashMap<String,TeachRequest> teachRequestMap = new HashMap<>();
+            teachRequestMap.put("CourseName", teachRequest);
+            TeachRequestMap teachRequestMapWrapper = new TeachRequestMap(teachRequestMap);
 
             Course course = mock(Course.class);
             //course's name is CourseName
             when(course.toString()).thenReturn("CourseName");
 
-            teachRequestMap.approveTeachRequest(course);
+
+            teachRequestMapWrapper.approveTeachRequest(course);
+
 
             //teachRequest is no longer in the underlying map
-            assertFalse(teachRequestMap.teachRequestMap.containsKey("CourseName"));
+            assertFalse(teachRequestMap.containsKey("CourseName"));
         }
 
     }
@@ -113,7 +130,7 @@ public class TeachRequestMapTest {
         @DisplayName("The teacher must satisfy the teaching requirements.")
         @Test
         public void notSatisfyingTeachReqs() throws NoTeachRequirementsSetException {
-            TeachRequestMap teachRequestMap = new TeachRequestMap();
+
             Course course = mock(Course.class);
             Teacher teacher = mock(Teacher.class);
             TeachRequest teachRequest = mock(TeachRequest.class);
@@ -125,16 +142,18 @@ public class TeachRequestMapTest {
             when(teacher.satisfiesTeachReqs(course)).thenReturn(false);
 
             //add teachRequest to the underlying map under CourseName
-            teachRequestMap.teachRequestMap.put("CourseName", teachRequest);
+            HashMap<String,TeachRequest> teachRequestMap = new HashMap<>();
+            teachRequestMap.put("CourseName", teachRequest);
+            TeachRequestMap teachRequestMapWrapper = new TeachRequestMap(teachRequestMap);
 
-            assertThrows(TeacherNotSuitableForCourseException.class, () -> teachRequestMap.proposeTeacher(course, teacher));
+            assertThrows(TeacherNotSuitableForCourseException.class, () -> teachRequestMapWrapper.proposeTeacher(course, teacher));
         }
 
         @DisplayName("If there is a teach request and the requirements are met," +
                 "nothing should be thrown.")
         @Test
         public void proposalOK() throws NoTeachRequirementsSetException {
-            TeachRequestMap teachRequestMap = new TeachRequestMap();
+
             Course course = mock(Course.class);
             Teacher teacher = mock(Teacher.class);
             TeachRequest teachRequest = mock(TeachRequest.class);
@@ -146,9 +165,11 @@ public class TeachRequestMapTest {
             when(teacher.satisfiesTeachReqs(course)).thenReturn(true);
 
             //add teachRequest to the underlying map under CourseName
-            teachRequestMap.teachRequestMap.put("CourseName", teachRequest);
+            HashMap<String,TeachRequest> teachRequestMap = new HashMap<>();
+            teachRequestMap.put("CourseName", teachRequest);
+            TeachRequestMap teachRequestMapWrapper = new TeachRequestMap(teachRequestMap);
 
-            assertDoesNotThrow(() -> teachRequestMap.proposeTeacher(course, teacher));
+            assertDoesNotThrow(() -> teachRequestMapWrapper.proposeTeacher(course, teacher));
         }
 
     }
@@ -160,29 +181,32 @@ public class TeachRequestMapTest {
         @DisplayName("The TeachRequest mustn't have been placed into the teachRequestMap.")
         @Test
         public void throwsIfTeachRequestPresent() {
-            TeachRequestMap teachRequestMap = new TeachRequestMap();
+
             Course course = mock(Course.class);
 
             //course's name is CourseName
             when(course.toString()).thenReturn("CourseName");
 
             //add new TeachRequest for course to the underlying map under CourseName
-            teachRequestMap.teachRequestMap.put("CourseName", new TeachRequest(course));
+            HashMap<String,TeachRequest> teachRequestMap = new HashMap<>();
+            teachRequestMap.put("CourseName", new TeachRequest(course));
+            TeachRequestMap teachRequestMapWrapper = new TeachRequestMap(teachRequestMap);
 
-            assertThrows(TeachRequestAlreadyGivenException.class, () -> teachRequestMap.addTeachRequest(course));
+            assertThrows(TeachRequestAlreadyGivenException.class, () -> teachRequestMapWrapper.addTeachRequest(course));
         }
 
         @DisplayName("If the TeachRequest is new, it should be added to the map.")
         @Test
         public void newTeachRequest() throws TeachRequestAlreadyGivenException {
-            TeachRequestMap teachRequestMap = new TeachRequestMap();
+            HashMap<String,TeachRequest> teachRequestMap = new HashMap<>();
+            TeachRequestMap teachRequestMapWrapper = new TeachRequestMap(teachRequestMap);
             Course course = mock(Course.class);
 
             //course's name is CourseName
             when(course.toString()).thenReturn("CourseName");
 
-            teachRequestMap.addTeachRequest(course);
-            assertTrue(teachRequestMap.teachRequestMap.containsKey("CourseName"));
+            teachRequestMapWrapper.addTeachRequest(course);
+            assertTrue(teachRequestMap.containsKey("CourseName"));
 
         }
 

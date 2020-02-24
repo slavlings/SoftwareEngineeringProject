@@ -146,8 +146,8 @@ public class Controller {
                 if (intUserInput > -1) {
                     Teacher proposedTeacher = suitableTeachers.get(intUserInput);
                     try {
-                        System.out.println("Proposal successful.");
                         admin.proposeTeacher(course, proposedTeacher);
+                        System.out.println("Proposal successful.");
                         System.out.println("Do you want to assign the required training for the course to the proposed teacher?");
                         System.out.println("Type in yes to proceed or no to go back");
                         while(true) {

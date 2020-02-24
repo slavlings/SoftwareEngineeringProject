@@ -15,7 +15,7 @@ import java.util.HashMap;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class TeachRequestMap {
 
-    HashMap<String, TeachRequest> teachRequestMap;
+    private HashMap<String, TeachRequest> teachRequestMap;
 
     @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
     public TeachRequestMap(@JsonProperty("teachRequestMap") HashMap<String, TeachRequest> teachRequestMap) {

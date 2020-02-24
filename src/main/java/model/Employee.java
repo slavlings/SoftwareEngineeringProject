@@ -10,18 +10,12 @@ import com.fasterxml.jackson.annotation.*;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public abstract class Employee {
 
-    private static int maxID = 0;
     private final String name;
-    private final int id;
 
     @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
-    public Employee(@JsonProperty("name") String name, @JsonProperty("id") int id) {
+    public Employee(@JsonProperty("name") String name) {
         this.name = name;
-        this.id = id;
-    }
 
-    public Employee(String name) {
-        this(name,++maxID);
     }
 
     @Override
@@ -29,15 +23,9 @@ public abstract class Employee {
         return name;
     }
 
-    public int getMaxID() {
-        return maxID;
-    }
-
     public String getName() {
         return name;
     }
 
-    public int getId() {
-        return id;
-    }
+
 }
