@@ -103,10 +103,7 @@ public class TeachRequestMap {
     }
 
     public boolean isEmpty() {
-        if (this.teachRequestMap.isEmpty()) {
-            return true;
-        }
-        return false;
+        return (this.teachRequestMap.isEmpty());
     }
 
 
