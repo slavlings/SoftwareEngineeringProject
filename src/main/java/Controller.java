@@ -391,7 +391,11 @@ public class Controller {
                 } else if (userInput.equals("0") || userInput.equals("1")) {
                     break;
                 } else {
-                    skillsToAdd.add(userInput);
+                    if(!skillsToAdd.contains(userInput)) {
+                        skillsToAdd.add(userInput);
+                    } else {
+                        System.out.println("You already added this skill.");
+                    }
                 }
             }
             if(userInput.equals("1")) {
