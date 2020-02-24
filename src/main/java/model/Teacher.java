@@ -14,16 +14,13 @@ public class Teacher extends Employee{
     private List<String> skills;
     private List<String> completedTrainings;
     private List<String> uncompletedTrainings;
-    private Course taughtCourse;
-    private int id;
 
     @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
-    public Teacher(@JsonProperty("name") String name,@JsonProperty("skills") List<String> skills,@JsonProperty("completedTrainings") List<String> completedTrainings,@JsonProperty("uncompletedTrainings") List<String> uncompletedTrainings,@JsonProperty("taughtCourse") Course taughtCourse) {
+    public Teacher(@JsonProperty("name") String name,@JsonProperty("skills") List<String> skills,@JsonProperty("completedTrainings") List<String> completedTrainings,@JsonProperty("uncompletedTrainings") List<String> uncompletedTrainings) {
         super(name);
         this.skills = skills;
         this.completedTrainings = completedTrainings;
         this.uncompletedTrainings = uncompletedTrainings;
-        this.taughtCourse = taughtCourse;
     }
 
 
@@ -33,14 +30,6 @@ public class Teacher extends Employee{
         uncompletedTrainings = new LinkedList<>();
         completedTrainings = new LinkedList<>();
         skills = new LinkedList<>();
-    }
-
-    /**
-     * Sets the course taught by this teacher.
-     * @param taughtCourse name of the course.
-     */
-    public void setCourse(Course taughtCourse) {
-        this.taughtCourse = taughtCourse;
     }
 
     /**
