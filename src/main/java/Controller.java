@@ -225,7 +225,7 @@ public class Controller {
             if ((uncompletedTrainings.isEmpty()) || (uncompletedTrainings == null)) {
                 System.out.println("There are no uncompleted trainings for the teacher.");
             } else {
-                System.out.println("There are following uncompleted trainings for this teacher.");
+                System.out.println("There are the following uncompleted trainings for this teacher.");
                 System.out.println("Which one do you want to mark as completed? ");
                 System.out.println("Select index or 0 to go back");
                 int index = 1;

@@ -2,8 +2,8 @@ package model;
 
 import com.fasterxml.jackson.annotation.*;
 import model.exceptions.NoTeachRequirementsSetException;
+import model.exceptions.TeacherTrainingAlreadyPresentException;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 @JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
@@ -41,9 +41,15 @@ public class Teacher extends Employee{
     /**
      * Adds a training to the list of uncompleted trainings.
      * @param training
+     * @throws TeacherTrainingAlreadyPresentException
      */
-    public void addTraining(String training){
-        uncompletedTrainings.add(training);
+    public void addTraining(String training) throws TeacherTrainingAlreadyPresentException {
+        if(uncompletedTrainings.contains(training)) {
+            throw new TeacherTrainingAlreadyPresentException();
+        } else {
+            uncompletedTrainings.add(training);
+        }
+
     }
 
     /**

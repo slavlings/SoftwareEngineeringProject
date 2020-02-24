@@ -78,9 +78,9 @@ public class Admin extends Employee {
      *
      * @param training given name of training
      * @param teacher  given teacher
+     * @throws TeacherTrainingAlreadyPresentException
      */
-
-    public void addTraining(Teacher teacher, String training) {
+    public void addTraining(Teacher teacher, String training) throws TeacherTrainingAlreadyPresentException {
         teacher.addTraining(training);
     }
 
