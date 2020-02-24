@@ -64,7 +64,7 @@ public class Controller {
         }
     }
 
-    public void adminSubMenu() {
+    private void adminSubMenu() {
         while (true) {
             System.out.println("Pick action:");
             System.out.println("-1 -> QUIT");
@@ -101,7 +101,7 @@ public class Controller {
         }
     }
 
-    public void suitableTeachersSubMenu() {
+    private void suitableTeachersSubMenu() {
         System.out.println("Which course do you want to find suitable teachers for?");
         System.out.println("Type in course name or 0 to go back.");
         String userInput = null;
@@ -175,7 +175,7 @@ public class Controller {
         }
     }
 
-    public void pttDirectorSubMenu() {
+    private void pttDirectorSubMenu() {
         while (true) {
             System.out.println("Pick action:");
             System.out.println("-1 -> QUIT");
@@ -204,7 +204,7 @@ public class Controller {
         }
     }
 
-    public void completeTrainingSubMenu() {
+    private void completeTrainingSubMenu() {
         System.out.println("Which teacher do you want to complete training for?");
         System.out.println("Type in teacher's name or 0 to go back.");
         String userInput = null;
@@ -254,7 +254,7 @@ public class Controller {
         }
     }
 
-    public void approveTeachRequestSubMenu() {
+    private void approveTeachRequestSubMenu() {
         TeachRequestMap availableTeachRequests = pttDirector.getTeachRequestMap();
         if ((availableTeachRequests == null) || availableTeachRequests.isEmpty()) {
             System.out.println("No teaching requests to approve were found.");
@@ -283,7 +283,7 @@ public class Controller {
         }
     }
 
-    public void classDirectorSubMenu() {
+    private void classDirectorSubMenu() {
         while (true) {
             System.out.println("Pick action:");
             System.out.println("-1 -> QUIT");
@@ -315,7 +315,7 @@ public class Controller {
         }
     }
 
-    public void selectClassDirectorSubMenu() {
+    private void selectClassDirectorSubMenu() {
         while (true) {
             System.out.println("Which course are you teaching?");
             System.out.println("Type in the name of the course, 0 to go back, or -1 to quit.");
@@ -337,7 +337,7 @@ public class Controller {
         }
     }
 
-    public void specificClassDirectorSubMenu() {
+    private void specificClassDirectorSubMenu() {
         while (true) {
             System.out.println("Pick action:");
             System.out.println("-1 -> QUIT");
@@ -375,7 +375,7 @@ public class Controller {
         }
     }
 
-    public void setCourseTeachingRequirements() {
+    private void setCourseTeachingRequirements() {
         LinkedList<String> skillsToAdd = new LinkedList<String>();
         while (true) {
             System.out.println("Type in skills for teaching requirements - type a skill, then enter and finish by pressing 1. You can type in as many skills as you want.");
@@ -403,7 +403,7 @@ public class Controller {
     }
 
 
-    public void addTeacherRequest() {
+    private void addTeacherRequest() {
         try {
             selectedCourseDirector.addTeachRequest();
             System.out.println("You have added a teach request for the course " + selectedCourseDirector.getDirectedCourse());
@@ -414,7 +414,7 @@ public class Controller {
 
 
 
-    public void quit() {
+    private void quit() {
         DataWrapper dataWrapper = new DataWrapper(teachers, courses, courseDirectors, admin, pttDirector);
         io.writeToJSON(dataWrapper);
         System.exit(0);
