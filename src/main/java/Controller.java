@@ -32,7 +32,7 @@ public class Controller {
             System.out.println("-1 -> QUIT");
             System.out.println("1 -> Admin");
             System.out.println("2 -> PTTDirector");
-            System.out.println("3 -> ClassDirector");
+            System.out.println("3 -> CourseDirector");
             int userInput;
             if (scanner.hasNextInt()) {
                 userInput = scanner.nextInt();
@@ -255,10 +255,6 @@ public class Controller {
     }
 
     private void approveTeachRequestSubMenu() {
-        TeachRequestMap availableTeachRequests = pttDirector.getTeachRequestMap();
-        if ((availableTeachRequests == null) || availableTeachRequests.isEmpty()) {
-            System.out.println("No teaching requests to approve were found.");
-        } else {
             System.out.println("For which course do you want to approve a teaching request?");
             System.out.println("Type in course name or 0 to go back.");
             String userInput = null;
@@ -272,15 +268,14 @@ public class Controller {
                 System.out.println("No course match found. Try again.");
             }
             if (course != null) {
-
                 try {
-                    availableTeachRequests.approveTeachRequest(course);
+                    pttDirector.approveTeachRequest(course);
                     System.out.println("You have approved a teaching request for the course " + course);
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
             }
-        }
+
     }
 
     private void classDirectorSubMenu() {
