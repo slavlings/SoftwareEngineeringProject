@@ -51,7 +51,7 @@ public class Controller {
                         break;
 
                     case 3:
-                        classDirectorSubMenu();
+                        courseDirectorSubMenu();
                         break;
 
                     default:
@@ -278,7 +278,7 @@ public class Controller {
 
     }
 
-    private void classDirectorSubMenu() {
+    private void courseDirectorSubMenu() {
         while (true) {
             System.out.println("Pick action:");
             System.out.println("-1 -> QUIT");
@@ -297,7 +297,7 @@ public class Controller {
                             break;
 
                         case 1:
-                            selectClassDirectorSubMenu();
+                            selectCourseDirectorSubMenu();
                             break;
 
                         default:
@@ -310,7 +310,7 @@ public class Controller {
         }
     }
 
-    private void selectClassDirectorSubMenu() {
+    private void selectCourseDirectorSubMenu() {
         while (true) {
             System.out.println("Which course are you teaching?");
             System.out.println("Type in the name of the course, 0 to go back, or -1 to quit.");
@@ -321,18 +321,18 @@ public class Controller {
             if(userInput.equals("-1")) {
                 quit();
             }
-            selectedCourseDirector = getClassDirector(userInput);
+            selectedCourseDirector = getCourseDirector(userInput);
             if (selectedCourseDirector != null) {
                 break;
             }
             System.out.println("No course match found. Try again.");
         }
         if(selectedCourseDirector != null) {
-            specificClassDirectorSubMenu();
+            specificCourseDirectorSubMenu();
         }
     }
 
-    private void specificClassDirectorSubMenu() {
+    private void specificCourseDirectorSubMenu() {
         while (true) {
             System.out.println("Pick action:");
             System.out.println("-1 -> QUIT");
@@ -429,7 +429,7 @@ public class Controller {
         return null;
     }
 
-    private CourseDirector getClassDirector(String courseName) {
+    private CourseDirector getCourseDirector(String courseName) {
 
         for(CourseDirector courseDirector : courseDirectors) {
             if(courseName.equals(courseDirector.getDirectedCourse().toString())) {
