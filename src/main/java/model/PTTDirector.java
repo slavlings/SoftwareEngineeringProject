@@ -38,6 +38,7 @@ public class PTTDirector extends Employee {
         teachRequestMap.approveTeachRequest(course);
     }
 
+    //getter
     public TeachRequestMap getTeachRequestMap() {
         return teachRequestMap;
     }

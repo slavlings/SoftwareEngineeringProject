@@ -49,6 +49,8 @@ public class CourseDirector extends Employee {
         teachRequestMap.addTeachRequest(directedCourse);
     }
 
+    //setter and getters
+
     public void setDirectedCourse(Course directedCourse) {
         this.directedCourse = directedCourse;
     }

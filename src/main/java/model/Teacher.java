@@ -6,6 +6,10 @@ import model.exceptions.TeacherTrainingAlreadyPresentException;
 
 import java.util.LinkedList;
 import java.util.List;
+
+/**
+ * Represents a Teacher.
+ */
 @JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @JsonIgnoreProperties(ignoreUnknown=true)
@@ -81,12 +85,22 @@ public class Teacher extends Employee{
         }
     }
 
-    public void setSkills(List<String> skills) {
-        this.skills = skills;
-    }
-
+    /**
+     * Checks if the current instance of Teacher satisfies
+     * the teaching requirements of a given course
+     * @param course given course
+     * @return whether the teacher satisfies
+     * the teaching requirements of a course(boolean)
+     * @throws NoTeachRequirementsSetException if the course has no teaching requirements set
+     */
     public boolean satisfiesTeachReqs(Course course) throws NoTeachRequirementsSetException {
         return course.requirementsFulfilled(skills);
+    }
+
+    //setter and getters
+
+    public void setSkills(List<String> skills) {
+        this.skills = skills;
     }
 
     public List<String> getCompletedTrainings() {

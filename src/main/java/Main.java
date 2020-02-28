@@ -1,11 +1,20 @@
 import model.*;
 import model.exceptions.NoProposedTeacherException;
 
+import javax.xml.crypto.Data;
 import java.util.LinkedList;
 
+/**
+ * Class that holds a main method that starts the Controller.
+ */
 public class Main {
 
-    public static void main(String[] args) throws Exception {
+    /**
+     * Main method. The commented out code was used to generate the given
+     * staff.json file.
+     * @param args
+     */
+    public static void main(String[] args) {
 //        Teacher t1 = new Teacher("John Smith");
 //        Teacher t2 = new Teacher("Michael Adams");
 //        Teacher t3 = new Teacher("Mac White");
@@ -93,7 +102,6 @@ public class Main {
 //        DataWrapper dataWrapper = new DataWrapper(teachers,courses,classDirectors,admin,pd);
 //        InputOutput io = InputOutput.getInstance();
 //        io.writeToJSON(dataWrapper);
-
 
 
         Controller c = new Controller();

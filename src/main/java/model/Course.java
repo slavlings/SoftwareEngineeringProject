@@ -95,6 +95,8 @@ public class Course {
         }
     }
 
+    //getters
+
     public String getName() {
         return name;
     }

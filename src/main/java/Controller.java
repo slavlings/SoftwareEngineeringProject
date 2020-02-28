@@ -5,6 +5,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Controller class. Handles UI and the method calls to the classes in the model package.
+ */
 public class Controller {
 
     private List<Teacher> teachers;
@@ -26,6 +29,10 @@ public class Controller {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * Starts the controller.
+     * Enters the main menu.
+     */
     public void start() {
         while (true) {
             System.out.println("Pick user:");
@@ -64,6 +71,9 @@ public class Controller {
         }
     }
 
+    /**
+     * Enters the admin submenu.
+     */
     private void adminSubMenu() {
         while (true) {
             System.out.println("Pick action:");
@@ -101,6 +111,9 @@ public class Controller {
         }
     }
 
+    /**
+     * Enters the suitable teachers submenu.
+     */
     private void suitableTeachersSubMenu() {
         System.out.println("Which course do you want to find suitable teachers for?");
         System.out.println("Type in course name or 0 to go back.");
@@ -175,6 +188,9 @@ public class Controller {
         }
     }
 
+    /**
+     * Enters the PTTDirector submenu.
+     */
     private void pttDirectorSubMenu() {
         while (true) {
             System.out.println("Pick action:");
@@ -204,6 +220,9 @@ public class Controller {
         }
     }
 
+    /**
+     * Enters the submenu for completing a teacher's training.
+     */
     private void completeTrainingSubMenu() {
         System.out.println("Which teacher do you want to complete training for?");
         System.out.println("Type in teacher's name or 0 to go back.");
@@ -254,6 +273,9 @@ public class Controller {
         }
     }
 
+    /**
+     * Enters the submenu for approving a teaching request.
+     */
     private void approveTeachRequestSubMenu() {
             System.out.println("For which course do you want to approve a teaching request?");
             System.out.println("Type in course name or 0 to go back.");
@@ -278,6 +300,9 @@ public class Controller {
 
     }
 
+    /**
+     * Enters the course director submenu.
+     */
     private void courseDirectorSubMenu() {
         while (true) {
             System.out.println("Pick action:");
@@ -310,6 +335,9 @@ public class Controller {
         }
     }
 
+    /**
+     * Enters the submenu for selecting a course director.
+     */
     private void selectCourseDirectorSubMenu() {
         while (true) {
             System.out.println("Which course are you teaching?");
@@ -332,6 +360,9 @@ public class Controller {
         }
     }
 
+    /**
+     * Enter the submenu for a specific course director.
+     */
     private void specificCourseDirectorSubMenu() {
         while (true) {
             System.out.println("Pick action:");
@@ -370,6 +401,9 @@ public class Controller {
         }
     }
 
+    /**
+     * Enter the submenu for setting the teaching requirements of a course.
+     */
     private void setCourseTeachingRequirements() {
         LinkedList<String> skillsToAdd = new LinkedList<String>();
         while (true) {
@@ -401,7 +435,9 @@ public class Controller {
         }
     }
 
-
+    /**
+     * Enter the submenu for adding a teaching request.
+     */
     private void addTeacherRequest() {
         try {
             selectedCourseDirector.addTeachRequest();
@@ -411,14 +447,21 @@ public class Controller {
         }
     }
 
-
-
+    /**
+     * Saves the app data to the staff.json file and quits the controller.
+     */
     private void quit() {
         DataWrapper dataWrapper = new DataWrapper(teachers, courses, courseDirectors, admin, pttDirector);
         io.writeToJSON(dataWrapper);
         System.exit(0);
     }
 
+    /**
+     * Returns a course with the given name or null if
+     * no such course is found.
+     * @param name given name
+     * @return course
+     */
     private Course getCourse(String name) {
 
         for (Course course : courses) {
@@ -429,6 +472,12 @@ public class Controller {
         return null;
     }
 
+    /**
+     * Returns the course director for a given course name
+     * or null if no such course director is found.
+     * @param courseName given course name
+     * @return course director
+     */
     private CourseDirector getCourseDirector(String courseName) {
 
         for(CourseDirector courseDirector : courseDirectors) {
@@ -439,6 +488,12 @@ public class Controller {
         return null;
     }
 
+    /**
+     * Returns the teacher with the given name
+     * or null if no such teacher is found.
+     * @param teacherName given teacher name
+     * @return teacher
+     */
     private Teacher getTeacher(String teacherName) {
         for(Teacher teacher: teachers) {
             if(teacherName.equals(teacher.toString())) {

@@ -95,6 +95,7 @@ public class Admin extends Employee {
         teacher.completeTraining(training);
     }
 
+    //getter
     public TeachRequestMap getTeachRequestMap() {
         return teachRequestMap;
     }

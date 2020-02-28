@@ -18,11 +18,13 @@ public abstract class Employee {
 
     }
 
+    //toString
     @Override
     public String toString() {
         return name;
     }
 
+    //getter
     public String getName() {
         return name;
     }

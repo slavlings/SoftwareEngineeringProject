@@ -55,6 +55,8 @@ public class TeachRequest {
         }
     }
 
+    //getters
+
     public Course getRequestedCourse() {
         return requestedCourse;
     }

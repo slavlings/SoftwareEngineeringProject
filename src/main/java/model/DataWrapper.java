@@ -7,6 +7,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
+/**
+ * Class that wraps all the data written to and read from the staff.json file.
+ */
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class DataWrapper {
@@ -25,6 +28,8 @@ public class DataWrapper {
         this.admin = admin;
         this.pttDirector = pttDirector;
     }
+
+    //getters
 
     public List<Teacher> getTeachers() {
         return teachers;

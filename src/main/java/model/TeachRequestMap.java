@@ -98,13 +98,20 @@ public class TeachRequestMap {
         }
     }
 
+    /**
+     * Checks if the underlying HashMap is empty.
+     * @return true/false
+     */
+    public boolean isEmpty() {
+        return (this.teachRequestMap.isEmpty());
+    }
+
+    //getter
     public HashMap<String, TeachRequest> getTeachRequestMap() {
         return teachRequestMap;
     }
 
-    public boolean isEmpty() {
-        return (this.teachRequestMap.isEmpty());
-    }
+
 
 
 }
