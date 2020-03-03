@@ -78,11 +78,7 @@ public class Teacher extends Employee{
      */
     public boolean completedTraining(final Course course ){
         String reqTraining = course.getReqTraining();
-        if(completedTrainings.contains(reqTraining)){
-            return true;
-        } else{
-            return false;
-        }
+        return completedTrainings.contains(reqTraining);
     }
 
     /**

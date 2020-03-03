@@ -87,11 +87,7 @@ public class Course {
         if(teachRequirements == null || teachRequirements.isEmpty()) {
             throw new NoTeachRequirementsSetException();
         } else {
-            if ((skills.containsAll(teachRequirements))){
-                return true;
-            } else {
-                return false;
-            }
+            return (skills.containsAll(teachRequirements));
         }
     }
 
