@@ -1,19 +1,15 @@
 package model;
 
-import model.exceptions.NoProposedTeacherException;
-import model.exceptions.NonExistentTeachRequestException;
-import model.exceptions.TeacherNotCompletedTrainingException;
 import model.exceptions.TeacherTrainingAlreadyPresentException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
+
 import java.util.LinkedList;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.doThrow;
+
 
 public class TeacherTest {
 
@@ -74,6 +70,7 @@ public class TeacherTest {
             teacher.completeTraining(training);
 
             assertEquals(true,completedTrainings.contains(training));
+            assertEquals(false,uncompletedTrainings.contains(training));
         }
 
         @DisplayName("The training is unassigned.")

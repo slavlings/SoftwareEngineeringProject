@@ -13,7 +13,7 @@ import static org.mockito.Mockito.*;
 public class TeachRequestMapTest {
 
     @Nested
-    @DisplayName("Teacher approval tests")
+    @DisplayName("Teaching request approval tests")
     public class TeacherApproval {
 
         @DisplayName("The TeachRequest must have been placed into the teachRequestMap.")
@@ -175,7 +175,7 @@ public class TeachRequestMapTest {
     }
 
     @Nested
-    @DisplayName("Teacher addition tests")
+    @DisplayName("Teaching request addition tests")
     public class TeacherAddition {
 
         @DisplayName("The TeachRequest mustn't have been placed into the teachRequestMap.")
