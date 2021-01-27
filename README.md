@@ -1,1 +1,1 @@
-The project is fully described in Report.pdf
+The project is fully described in [Report.pdf](Report.pdf)
